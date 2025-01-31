@@ -5,7 +5,7 @@ import Logo from "../images/Logo.png";
 export default function Sidebar() {
   return (
     <div className="flex flex-col items-center bg-indigo-500 h-screen w-64">
-      <div className="mt-6">
+      <div className="mt-6 mx-6">
         <Image src={Logo} alt="logo" />
       </div>
       <div className="bg-slate-600 flex-col mx-14 my-8">

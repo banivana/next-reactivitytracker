@@ -1,4 +1,4 @@
-import MyTable from "../components/MyTable";
+import MyTable from "../components/dashboard/MyTable";
 
 export default async function Dashboard() {
   try {

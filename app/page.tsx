@@ -1,5 +1,5 @@
 import * as React from "react";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/dashboard/Sidebar";
 
 export default function Home() {
   return (

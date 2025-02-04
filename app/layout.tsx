@@ -1,18 +1,28 @@
 import * as React from "react";
 import { NextUIProvider } from "@nextui-org/system";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin"],
+  weight: ["800"],
+  variable: "--font-nunito-sans",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-ubuntu",
+});
+const notoSans = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  variable: "--font-noto-sans",
+});
+const baloo2 = Baloo_2({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-baloo-2",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nunitoSans.variable} ${ubuntu.variable} ${notoSans.variable} ${baloo2.variable} font-sans`}
       >
         <NextUIProvider>{children}</NextUIProvider>
       </body>

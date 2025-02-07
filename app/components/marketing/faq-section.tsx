@@ -44,15 +44,94 @@ export function FAQSection() {
               Who is Reactivity Tracker for?
             </AccordionTrigger>
             <AccordionContent className="text-lg font-notoSans">
-              Reactivity Tracker is designed for professional dog trainers and
-              behaviorists who work with reactive dogs. It helps you collect and
-              analyze data from your clients, making it easier to track progress
-              and adjust training plans based on concrete information.
+              <ul className="list-disc pl-6 space-y-2">
+                <li>
+                  Dog professionals who want to gain a deeper understanding of
+                  dog behavior and learn from objective data, patterns, and
+                  graphs.
+                </li>
+                <li>
+                  Dog guardians who want to track their dog's triggers and
+                  health, gain insights into behavior patterns, and have an easy
+                  way to communicate behavior changes with other professionals.
+                </li>
+              </ul>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem
             value="item-3"
+            className="border rounded-lg px-6 shadow-sm"
+          >
+            <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
+              Is the Reactivity Tracker available now?
+            </AccordionTrigger>
+            <AccordionContent className="text-lg font-notoSans">
+              The mobile app is in beta (
+              <a
+                href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#FFB915] hover:underline ml-1"
+              >
+                Join testing for free!
+              </a>{" "}
+              ). The trainer dashboard is launching soon—sign up for{" "}
+              <a
+                href="https://forms.gle/yy6R55PwBhrnuoD16"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#FFB915] hover:underline ml-1"
+              >
+                early access
+              </a>
+              .
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem
+            value="item-4"
+            className="border rounded-lg px-6 shadow-sm"
+          >
+            <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
+              How can I get early access to the trainer dashboard?
+            </AccordionTrigger>
+            <AccordionContent className="text-lg font-notoSans">
+              <a
+                href="https://forms.gle/yy6R55PwBhrnuoD16"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#FFB915] hover:underline ml-1"
+              >
+                Join early access
+              </a>
+              , and we’ll notify you when it’s ready.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem
+            value="item-5"
+            className="border rounded-lg px-6 shadow-sm"
+          >
+            <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
+              Can I start using the mobile app now?
+            </AccordionTrigger>
+            <AccordionContent className="text-lg font-notoSans">
+              Yes! Dog owners can start tracking triggers (
+              <a
+                href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#FFB915] hover:underline ml-1"
+              >
+                Start using now!
+              </a>
+              ) while we finalize the trainer dashboard.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem
+            value="item-6"
             className="border rounded-lg px-6 shadow-sm"
           >
             <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
@@ -70,35 +149,6 @@ export function FAQSection() {
                   motivation
                 </li>
               </ul>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem
-            value="item-4"
-            className="border rounded-lg px-6 shadow-sm"
-          >
-            <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
-              How long do I have access when I buy?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-notoSans">
-              When you purchase Reactivity Tracker, you get unlimited access to
-              both the mobile app and trainer dashboard. Your subscription
-              includes all future updates and improvements to the platform.
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem
-            value="item-5"
-            className="border rounded-lg px-6 shadow-sm"
-          >
-            <AccordionTrigger className="text-xl font-notoSans hover:no-underline">
-              Can I get my money back?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg font-notoSans">
-              Yes, we offer a 30-day money-back guarantee. If you're not
-              satisfied with Reactivity Tracker, simply contact us within 30
-              days of your purchase, and we'll process your refund with no
-              questions asked.
             </AccordionContent>
           </AccordionItem>
         </Accordion>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -19,8 +21,13 @@ export function HeroSection() {
         </p>
 
         <div className="mt-10">
-          <Button className="rounded-md bg-black text-white hover:bg-black/90 px-8 py-6 text-lg font-ubuntu font-bold">
-            Get Reactivity Tracker
+          <Button
+            className="rounded-md bg-black text-white hover:bg-black/90 px-8 py-6 text-lg font-ubuntu font-bold"
+            onClick={() =>
+              window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
+            }
+          >
+            Join Early Access
           </Button>
         </div>
 

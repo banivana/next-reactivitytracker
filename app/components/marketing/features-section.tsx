@@ -9,6 +9,7 @@ import {
   FileClock,
   SignpostBig,
   BrainCog,
+  ArrowRight,
 } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -26,10 +27,29 @@ export function FeaturesSection() {
             <h3 className="text-3xl font-black tracking-tight sm:text-4xl font-notoSans mb-6">
               Track, Organize, Visualize!
             </h3>
-            <p className="text-xl mb-8 font-notoSans">
-              The Reactivity Tracker mobile app empowers dog owners to log their
-              dog's triggers, health updates, and important notes with ease.
+            <p className="text-xl mb-4 font-notoSans">
+              The Reactivity Tracker mobile app (
+              <span className="font-semibold">Beta available now!</span>)
+              empowers dog owners to log their dog's triggers, health updates,
+              and important notes with ease.
             </p>
+            <div className="flex flex-wrap items-center gap-2 mb-8">
+              <ArrowRight className="text-[#FFB915]" />
+              <span className="text-xl font-notoSans">
+                Want to test our app for free?
+              </span>
+              <span className="flex items-center text-xl font-notoSans">
+                Sign up
+                <a
+                  href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#FFB915] hover:underline ml-1"
+                >
+                  here!
+                </a>
+              </span>
+            </div>
             <div className="space-y-8">
               <Feature
                 icon={<Smartphone className="w-6 h-6" />}
@@ -78,10 +98,25 @@ export function FeaturesSection() {
             <h3 className="text-3xl font-black tracking-tight sm:text-4xl font-notoSans mb-6">
               Insights at Your Fingerprints
             </h3>
-            <p className="text-xl mb-8 font-notoSans">
+            <p className="text-xl mb-4 font-notoSans">
               With just one click, dive into your client's detailed data through
-              the Trainer Dashboard.
+              the Trainer Dashboard (
+              <span className="font-semibold">Comming soon!</span>).
             </p>
+            <div className="flex flex-wrap items-center gap-2 mb-8">
+              <ArrowRight className="text-[#FFB915]" />
+              <span className="flex items-center text-xl font-notoSans">
+                Join waitinglist
+                <a
+                  href="https://forms.gle/yy6R55PwBhrnuoD16"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#FFB915] hover:underline ml-1"
+                >
+                  now!
+                </a>
+              </span>
+            </div>
             <div className="space-y-8">
               <Feature
                 icon={<TextSearch className="w-6 h-6" />}

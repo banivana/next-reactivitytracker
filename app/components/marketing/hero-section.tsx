@@ -34,12 +34,22 @@ export function HeroSection() {
         <div className="relative mt-16">
           <div className="flex justify-center">
             <div className="relative w-full max-w-[1200px]">
+              {/* Desktop Image */}
               <Image
                 src="/images/hero-visual.png"
                 alt="Reactivity Tracker Dashboard"
                 width={1200}
                 height={675}
-                className="rounded-lg"
+                className="rounded-lg hidden md:block"
+                priority
+              />
+              {/* Mobile Image */}
+              <Image
+                src="/images/hero-visual-mobile.png"
+                alt="Reactivity Tracker Dashboard"
+                width={1200}
+                height={675}
+                className="rounded-lg block md:hidden"
                 priority
               />
             </div>

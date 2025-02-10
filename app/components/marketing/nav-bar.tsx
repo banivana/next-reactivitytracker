@@ -10,9 +10,9 @@ export function NavBar() {
 
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between px-4 py-4 md:px-6 lg:px-8 bg-white">
-      <div
+      <a
         className="flex items-center flex-shrink-0 cursor-pointer"
-        onClick={() => window.location.reload()}
+        href="/marketing/#hero"
       >
         <svg
           width="58"
@@ -74,7 +74,7 @@ export function NavBar() {
         <span className="text-xl font-extrabold font-nunitoSans">
           <span className="text-[#FFB915]">Reactivity</span>Tracker
         </span>
-      </div>
+      </a>
 
       {/* Desktop Menu */}
       <div className="hidden lg:flex flex-grow justify-center">

@@ -168,7 +168,7 @@ export function FeaturesSection() {
           <div className="flex-1 order-2 md:order-2">
             <div className="relative mx-auto max-w-[800px]">
               <Image
-                src="/images/learn-features.png"
+                src="/images/features_3.png"
                 alt="Illustration of professionals analyzing dog behavior data with graphs and charts"
                 width={600}
                 height={450}

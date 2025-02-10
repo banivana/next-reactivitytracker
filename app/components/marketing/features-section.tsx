@@ -52,19 +52,16 @@ export function FeaturesSection() {
             </div>
             <div className="space-y-8">
               <Feature
-                icon={<Smartphone className="w-6 h-6" />}
-                title="Simplified tracking"
-                description="with an intuitive, user-friendly interface"
+                icon={<Smartphone className="w-4 h-4" />}
+                description="Simplified tracking with an intuitive, user-friendly interface"
               />
               <Feature
-                icon={<Notebook className="w-6 h-6" />}
-                title="Daily journal"
-                description="organized by date"
+                icon={<Notebook className="w-4 h-4" />}
+                description="Daily journal organized by date"
               />
               <Feature
-                icon={<BarChart3 className="w-6 h-6" />}
-                title="Visualize data"
-                description="through clear graphs to identify trends and track progress"
+                icon={<BarChart3 className="w-4 h-4" />}
+                description="Visualize data through clear graphs to identify trends and track progress"
               />
             </div>
           </div>
@@ -106,7 +103,7 @@ export function FeaturesSection() {
             <div className="flex flex-wrap items-center gap-2 mb-8">
               <ArrowRight className="text-[#FFB915]" />
               <span className="flex items-center text-xl font-notoSans">
-                Join waitinglist
+                Join the waiting list
                 <a
                   href="https://forms.gle/yy6R55PwBhrnuoD16"
                   target="_blank"
@@ -119,19 +116,16 @@ export function FeaturesSection() {
             </div>
             <div className="space-y-8">
               <Feature
-                icon={<TextSearch className="w-6 h-6" />}
-                title="Organized client data"
-                description="Access and manage all your client information in one place"
+                icon={<TextSearch className="w-4 h-4" />}
+                description="Organized client data"
               />
               <Feature
-                icon={<FileClock className="w-6 h-6" />}
-                title="Stay updated"
-                description="on your clients' day-to-day realities"
+                icon={<FileClock className="w-4 h-4" />}
+                description="Stay updated on your clients’ day-to-day realities"
               />
               <Feature
-                icon={<PieChart className="w-6 h-6" />}
-                title="Use data"
-                description="to tailor your training plan and monitor behavioral changes"
+                icon={<PieChart className="w-4 h-4" />}
+                description="Use data to tailor your training plan and monitor behavioral changes"
               />
             </div>
           </div>
@@ -149,19 +143,16 @@ export function FeaturesSection() {
             </p>
             <div className="space-y-8">
               <Feature
-                icon={<Users className="w-6 h-6" />}
-                title="Export data easily"
-                description="for collaboration with veterinarians or other professionals"
+                icon={<Users className="w-4 h-4" />}
+                description="Export data easily for collaboration with veterinarians and other professionals"
               />
               <Feature
-                icon={<SignpostBig className="w-6 h-6" />}
-                title="Make decisions"
-                description="grounded in clear, reliable insights"
+                icon={<SignpostBig className="w-4 h-4" />}
+                description="Make decisions grounded in clear, reliable insights"
               />
               <Feature
-                icon={<BrainCog className="w-6 h-6" />}
-                title="Gain a deeper understanding"
-                description="of behavior and progress through objective analysis"
+                icon={<BrainCog className="w-4 h-4" />}
+                description="Gain a deeper understanding of behavior and progress through objective analysis"
               />
             </div>
           </div>
@@ -184,18 +175,16 @@ export function FeaturesSection() {
 
 interface FeatureProps {
   icon: ReactNode;
-  title: string;
   description: string;
 }
 
-function Feature({ icon, title, description }: FeatureProps) {
+function Feature({ icon, description }: FeatureProps) {
   return (
-    <div className="flex gap-4">
-      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#FFB915] flex items-center justify-center">
+    <div className="flex items-center gap-4">
+      <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#FFB915] flex items-center justify-center">
         {icon}
       </div>
       <div>
-        <h3 className="font-bold mb-2 font-notoSans">{title}</h3>
         <p className="font-notoSans">{description}</p>
       </div>
     </div>

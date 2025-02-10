@@ -46,12 +46,12 @@ export function AboutSection() {
 
         {/* Our Story */}
         <div className="flex flex-col md:flex-col lg:flex-row gap-20 items-center">
-          <div className="flex-1 order-2 lg:order-1 space-y-8 md:pr-8">
+          <div className="flex-1 order-2 md:order-2 lg:order-1 space-y-8 md:pr-8">
             <p className="text-xl font-notoSans">
-              Both Domagoj and I have background in natural sciences so it was
-              natural for us to investigate how data nad information could help
-              us in our reactivity journey which is usually very descriptive and
-              full of emotions.
+              Both Domagoj and I have a background in natural sciences and
+              engineering, so it was natural for us to investigate how data
+              could help us in our reactivity journey, which is usually very
+              descriptive and full of emotions.
             </p>
             <p className="text-xl font-notoSans">
               So, basically sice the beginning of our journey we felt the need
@@ -60,11 +60,11 @@ export function AboutSection() {
               <span className="font-bold">track progress</span>, and after all
               to <span className="font-bold">communicate more easily</span> our
               progress with Igor. This journal started as pen and paper, then
-              google docs, then excell table. And finally as Reactivity Tracker
+              google docs, then excell table, and finally as Reactivity Tracker
               app.
             </p>
           </div>
-          <div className="relative order-2 md:order-1 max-w-[600px] md:w-3/4 mx-auto">
+          <div className="relative order-1 md:order-1 lg:order-2 max-w-[500px] md:w-3/4 mx-auto">
             <div className="absolute inset-0 bg-[#ffb915] scale-110 origin-center -rotate-3" />
             <Image
               src="/images/DIP.png"
@@ -95,7 +95,7 @@ export function AboutSection() {
             <ul className="space-y-4 text-xl font-notoSans">
               <li className="flex items-start gap-2">
                 <span className="font-bold">•</span>
-                <p>
+                <p className="text-left">
                   help dog trainers to dig deeper in{" "}
                   <span className="font-bold">understanding the behaviour</span>{" "}
                   and patterns
@@ -103,15 +103,21 @@ export function AboutSection() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-bold">•</span>
-                help{" "}
-                <span className="font-bold">
-                  track some parameters and progress
-                </span>
+                <p className="text-left">
+                  help{" "}
+                  <span className="font-bold">
+                    track some parameters and progress
+                  </span>
+                </p>
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-bold">•</span>
-                and improve the{" "}
-                <span className="font-bold">client-trainer communication</span>
+                <p className="text-left">
+                  and improve the{" "}
+                  <span className="font-bold">
+                    client-trainer communication
+                  </span>
+                </p>
               </li>
             </ul>
           </div>

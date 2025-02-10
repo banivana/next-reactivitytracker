@@ -46,9 +46,11 @@ export function FAQSection() {
             <AccordionContent className="text-lg font-notoSans">
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  Dog professionals who want to gain a deeper understanding of
-                  dog behavior and learn from objective data, patterns, and
-                  graphs.
+                  For dog professionals interested in using data to tailor
+                  personalized behavior plans for their clients. This is for
+                  trainers who want a clear, organized way to track patterns,
+                  monitor progress, and help clients identify triggers—making
+                  behavior modification more data-driven.
                 </li>
                 <li>
                   Dog guardians who want to track their dog's triggers and
@@ -76,7 +78,7 @@ export function FAQSection() {
               >
                 Join testing for free!
               </a>{" "}
-              ). The trainer dashboard is launching soon—sign up for{" "}
+              ). The trainer dashboard is launching soon—sign up for an{" "}
               <a
                 href="https://forms.gle/yy6R55PwBhrnuoD16"
                 target="_blank"

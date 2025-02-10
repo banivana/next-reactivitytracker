@@ -44,7 +44,9 @@ export default function RootLayout({
       <body
         className={`${nunitoSans.variable} ${ubuntu.variable} ${notoSans.variable} ${baloo2.variable} font-sans`}
       >
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <main className="flex-1">{children}</main>
+        </NextUIProvider>
       </body>
     </html>
   );

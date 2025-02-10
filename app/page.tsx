@@ -1,15 +1,23 @@
-import * as React from "react";
-import Sidebar from "./components/dashboard/Sidebar";
+import { AboutSection } from "./components/marketing/about-section";
+import { ContactSection } from "./components/marketing/contact-section";
+import { FAQSection } from "./components/marketing/faq-section";
+import { FeaturesSection } from "./components/marketing/features-section";
+import { FooterSection } from "./components/marketing/footer-section";
+import { HeroSection } from "./components/marketing/hero-section";
+import { NavBar } from "./components/marketing/nav-bar";
+import { ProblemSolution } from "./components/marketing/problem-solution";
 
 export default function Home() {
   return (
-    <div className="flex flex-row">
-      <div>
-        <Sidebar />
-      </div>
-      <div className="p-4">
-        <h1 className="text-3xl font-bold mb-4"> Dashboard Home Page</h1>
-      </div>
-    </div>
+    <main>
+      <NavBar />
+      <HeroSection />
+      <ProblemSolution />
+      <FeaturesSection />
+      <ContactSection />
+      <AboutSection />
+      <FAQSection />
+      <FooterSection />
+    </main>
   );
 }

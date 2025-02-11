@@ -61,7 +61,7 @@ export function FeaturesSection() {
               />
               <Feature
                 icon={<BarChart3 className="w-4 h-4" />}
-                description="Visualize data through clear graphs to identify trends and track progress"
+                description="Visualize data with clear graphs to track progress and identify trends."
               />
             </div>
           </div>
@@ -121,7 +121,7 @@ export function FeaturesSection() {
               />
               <Feature
                 icon={<FileClock className="w-4 h-4" />}
-                description="Stay updated on your clients’ day-to-day realities"
+                description="Stay connected to your clients' daily realities"
               />
               <Feature
                 icon={<PieChart className="w-4 h-4" />}
@@ -159,7 +159,7 @@ export function FeaturesSection() {
           <div className="flex-1 order-2 md:order-2">
             <div className="relative mx-auto max-w-[800px]">
               <Image
-                src="/images/features_3.png"
+                src="/images/features_3a.png"
                 alt="Illustration of professionals analyzing dog behavior data with graphs and charts"
                 width={600}
                 height={450}

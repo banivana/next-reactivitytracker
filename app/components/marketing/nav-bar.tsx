@@ -10,9 +10,9 @@ export function NavBar() {
 
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between px-4 py-4 md:px-6 lg:px-8 bg-white">
-      <a
+      <Link
         className="flex items-center flex-shrink-0 cursor-pointer"
-        href="/marketing/#hero"
+        href="#hero"
       >
         <svg
           width="58"
@@ -74,7 +74,7 @@ export function NavBar() {
         <span className="text-xl font-extrabold font-nunitoSans">
           <span className="text-[#FFB915]">Reactivity</span>Tracker
         </span>
-      </a>
+      </Link>
 
       {/* Desktop Menu */}
       <div className="hidden lg:flex flex-grow justify-center">
@@ -110,7 +110,7 @@ export function NavBar() {
             </NavLink>
             <Button
               variant="secondary"
-              className=" bg-black text-white hover:bg-black/90 rounded-md font-ubuntu font-bold"
+              className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
               onClick={() =>
                 window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
               }
@@ -124,7 +124,7 @@ export function NavBar() {
       <div className="hidden lg:block w-[200px] text-right">
         <Button
           variant="secondary"
-          className=" bg-black text-white hover:bg-black/90 rounded-md font-ubuntu font-bold"
+          className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
           onClick={() =>
             window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
           }

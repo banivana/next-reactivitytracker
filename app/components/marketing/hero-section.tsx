@@ -22,7 +22,7 @@ export function HeroSection() {
 
         <div className="mt-10">
           <Button
-            className="rounded-md bg-black text-white hover:bg-black/90 px-8 py-6 text-lg font-ubuntu font-bold"
+            className="rounded-2xl bg-black text-white hover:bg-[#FDB813] hover:text-black px-8 py-6 text-lg font-ubuntu font-bold"
             onClick={() =>
               window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
             }

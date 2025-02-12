@@ -21,14 +21,11 @@ export function HeroSection() {
         </p>
 
         <div className="mt-10">
-          <Button
-            className="rounded-2xl bg-black text-white hover:bg-[#FDB813] hover:text-black px-8 py-6 text-lg font-ubuntu font-bold"
-            onClick={() =>
-              window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
-            }
-          >
-            Join Early Access
-          </Button>
+          <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+            <Button className="rounded-2xl bg-black text-white hover:bg-[#FDB813] hover:text-black px-8 py-6 text-lg font-ubuntu font-bold">
+              Join Early Access
+            </Button>
+          </a>
         </div>
 
         <div className="relative mt-16">

@@ -21,15 +21,14 @@ export function FooterSection() {
             Help your clients with dog reactivity.
           </p>
           <div className="text-right mt-5">
-            <Button
-              variant="secondary"
-              className=" bg-white border-1 border-black text-black hover:bg-[#FDB813]/90 rounded-2xl font-ubuntu"
-              onClick={() =>
-                window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
-              }
-            >
-              Join Now!
-            </Button>
+            <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+              <Button
+                variant="secondary"
+                className=" bg-white border-1 border-black text-black hover:bg-[#FDB813]/90 rounded-2xl font-ubuntu"
+              >
+                Join Now!
+              </Button>
+            </a>
           </div>
         </div>
         <div className="mx-auto text-left">

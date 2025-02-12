@@ -108,29 +108,27 @@ export function NavBar() {
             <NavLink href="#contact" onClick={() => setIsMenuOpen(false)}>
               Support
             </NavLink>
-            <Button
-              variant="secondary"
-              className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
-              onClick={() =>
-                window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
-              }
-            >
-              Join Now!
-            </Button>
+            <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+              <Button
+                variant="secondary"
+                className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
+              >
+                Join Now!
+              </Button>
+            </a>
           </div>
         </div>
       )}
 
       <div className="hidden lg:block w-[200px] text-right">
-        <Button
-          variant="secondary"
-          className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
-          onClick={() =>
-            window.open("https://forms.gle/yy6R55PwBhrnuoD16", "_blank")
-          }
-        >
-          Join Now!
-        </Button>
+        <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+          <Button
+            variant="secondary"
+            className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
+          >
+            Join Now!
+          </Button>
+        </a>
       </div>
     </nav>
   );

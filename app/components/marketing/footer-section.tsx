@@ -50,7 +50,7 @@ export function FooterSection() {
               href="#contact"
               className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
             >
-              Support
+              Contact
             </Link>
           </nav>
         </div>

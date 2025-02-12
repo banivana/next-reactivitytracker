@@ -81,7 +81,7 @@ export function NavBar() {
         <div className="flex items-center space-x-8">
           <NavLink href="#features">Features</NavLink>
           <NavLink href="#about">About us</NavLink>
-          <NavLink href="#contact">Support</NavLink>
+          <NavLink href="#contact">Contact</NavLink>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export function NavBar() {
               About us
             </NavLink>
             <NavLink href="#contact" onClick={() => setIsMenuOpen(false)}>
-              Support
+              Contact
             </NavLink>
             <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
               <Button

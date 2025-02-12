@@ -2,7 +2,7 @@ import { X, Check } from "lucide-react";
 
 export function ProblemSolution() {
   return (
-    <section className="py-24 px-4 mx-2 md:px-6 lg:px-8 bg-[#FAFAFA] rounded-[100px] overflow-hidden border border-[#E1E1E1]">
+    <section className="py-6 px-4 mx-2 md:px-6 lg:px-8 bg-[#FAFAFA] rounded-[100px] overflow-hidden border border-[#E1E1E1]">
       <div className="mx-auto">
         <div className="p-8 md:p-12 lg:p-16">
           <div className="text-center mb-16">

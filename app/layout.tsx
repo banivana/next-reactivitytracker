@@ -3,6 +3,7 @@ import { NextUIProvider } from "@nextui-org/system";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
+import Script from "next/script";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -42,10 +43,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/logo.svg"></link>
+      <head>
+        <link rel="icon" href="/logo.svg"></link>
+      </head>
       <body
         className={`${nunitoSans.variable} ${ubuntu.variable} ${notoSans.variable} ${baloo2.variable} font-sans`}
       >
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5CQD9YP7GE"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5CQD9YP7GE');
+          `}
+        </Script>
         <NextUIProvider>
           <main className="flex-1">{children}</main>
         </NextUIProvider>

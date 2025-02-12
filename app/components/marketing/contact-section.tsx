@@ -16,8 +16,8 @@ export function ContactSection() {
           >
             banivana5@gmail.com
           </a>{" "}
-          and we'll be happy to answer your questions and provide additional
-          information you need.
+          and we&apos;ll be happy to answer your questions and provide
+          additional information you need.
         </p>
       </div>
     </section>

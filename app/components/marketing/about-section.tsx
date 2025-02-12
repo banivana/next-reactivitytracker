@@ -20,7 +20,7 @@ export function AboutSection() {
               <p className="text-xl font-notoSans">
                 As a first-time dog owner we where over the moon excited to
                 adopt our own dog. However, reality was a bit different for us.
-                Penny came with set of challenges we weren't prepared for.
+                Penny came with set of challenges we weren&apos;t prepared for.
                 Health issues, lunging and barking towards other dogs and
                 strangers, noise sensitivity, fearful of new environments, can
                 anxiety,...

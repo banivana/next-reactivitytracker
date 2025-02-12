@@ -70,7 +70,7 @@ export function ProblemSolution() {
                         No clear way to track
                       </span>{" "}
                       how interventions like medications or training affect
-                      dog's well-being over time
+                      dog&apos;s well-being over time
                     </>
                   }
                 />
@@ -135,7 +135,7 @@ export function ProblemSolution() {
                   text={
                     <>
                       Data-driven insights show clear impact of interventions on
-                      dog's{" "}
+                      dog&apos;s{" "}
                       <span className="font-semibold">
                         well-being through time-based analytics
                       </span>

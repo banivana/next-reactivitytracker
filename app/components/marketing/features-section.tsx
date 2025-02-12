@@ -30,8 +30,8 @@ export function FeaturesSection() {
             <p className="text-xl mb-4 font-notoSans">
               The Reactivity Tracker mobile app (
               <span className="font-semibold">Beta available now!</span>)
-              empowers dog owners to log their dog's triggers, health updates,
-              and important notes with ease.
+              empowers dog owners to log their dog&apos;s triggers, health
+              updates, and important notes with ease.
             </p>
             <div className="flex flex-wrap items-center gap-2 mb-8">
               <ArrowRight className="text-[#FFB915]" />
@@ -96,8 +96,8 @@ export function FeaturesSection() {
               Insights at Your Fingerprints
             </h3>
             <p className="text-xl mb-4 font-notoSans">
-              With just one click, dive into your client's detailed data through
-              the Trainer Dashboard (
+              With just one click, dive into your client&apos;s detailed data
+              through the Trainer Dashboard (
               <span className="font-semibold">Comming soon!</span>).
             </p>
             <div className="flex flex-wrap items-center gap-2 mb-8">

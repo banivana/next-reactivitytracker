@@ -53,7 +53,7 @@ export function FAQSection() {
                   behavior modification more data-driven.
                 </li>
                 <li>
-                  Dog guardians who want to track their dog's triggers and
+                  Dog guardians who want to track their dog&apos;s triggers and
                   health, gain insights into behavior patterns, and have an easy
                   way to communicate behavior changes with other professionals.
                 </li>

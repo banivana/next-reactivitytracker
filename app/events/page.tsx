@@ -25,6 +25,7 @@ export default async function Dashboard() {
       </div>
     );
   } catch (err) {
+    console.error(err);
     return <div>sorry</div>;
   }
 }

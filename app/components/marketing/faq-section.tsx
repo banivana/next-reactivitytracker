@@ -119,7 +119,7 @@ export function FAQSection() {
               Can I start using the mobile app now?
             </AccordionTrigger>
             <AccordionContent className="text-lg font-notoSans">
-              Yes! Dog owners can start tracking triggers (
+              Yes! Dog guardians can start tracking triggers (
               <a
                 href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
                 target="_blank"
@@ -140,7 +140,8 @@ export function FAQSection() {
               What&apos;s the point in tracking data?
             </AccordionTrigger>
             <AccordionContent className="text-lg font-notoSans">
-              Tracking data helps both trainers and dog owners in several ways:
+              Tracking data helps both trainers and dog guardians in several
+              ways:
               <ul className="list-disc pl-6 mt-2 space-y-2">
                 <li>Identify patterns in reactive behavior and triggers</li>
                 <li>Monitor the effectiveness of training interventions</li>

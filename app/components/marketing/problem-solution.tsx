@@ -41,7 +41,7 @@ export function ProblemSolution() {
                       <span className="font-semibold">
                         Incomplete or forgotten information
                       </span>{" "}
-                      from pet owners during consultation
+                      from pet guardians during consultation
                     </>
                   }
                 />

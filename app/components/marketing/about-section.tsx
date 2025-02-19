@@ -18,7 +18,7 @@ export function AboutSection() {
                 care for this fella.
               </p>
               <p className="text-xl font-notoSans">
-                As a first-time dog owner we where over the moon excited to
+                As a first-time dog owners we where over the moon excited to
                 adopt our own dog. However, reality was a bit different for us.
                 Penny came with set of challenges we weren&apos;t prepared for.
                 Health issues, lunging and barking towards other dogs and
@@ -54,7 +54,7 @@ export function AboutSection() {
               descriptive and full of emotions.
             </p>
             <p className="text-xl font-notoSans">
-              So, basically sice the beginning of our journey we felt the need
+              So, basically since the beginning of our journey we felt the need
               to write some kind of journal. To{" "}
               <span className="font-bold">ease our minds</span>, to{" "}
               <span className="font-bold">track progress</span>, and after all

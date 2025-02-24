@@ -96,8 +96,8 @@ export function AboutSection() {
               <li className="flex items-start gap-2">
                 <span className="font-bold">•</span>
                 <p className="text-left">
-                  help dog trainers to dig deeper in{" "}
-                  <span className="font-bold">understanding the behaviour</span>{" "}
+                  help behavior professionals to dig deeper in{" "}
+                  <span className="font-bold">understanding the behavior</span>{" "}
                   and patterns
                 </p>
               </li>

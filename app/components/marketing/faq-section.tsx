@@ -46,11 +46,11 @@ export function FAQSection() {
             <AccordionContent className="text-lg font-notoSans">
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  For dog professionals interested in using data to tailor
+                  For behavior professionals interested in using data to tailor
                   personalized behavior plans for their clients. This is for
-                  trainers who want a clear, organized way to track patterns,
-                  monitor progress, and help clients identify triggers—making
-                  behavior modification more data-driven.
+                  behavior professionals who want a clear, organized way to
+                  track patterns, monitor progress, and help clients identify
+                  triggers—making behavior modification more data-driven.
                 </li>
                 <li>
                   Dog guardians who want to track their dog&apos;s triggers and
@@ -140,8 +140,8 @@ export function FAQSection() {
               What&apos;s the point in tracking data?
             </AccordionTrigger>
             <AccordionContent className="text-lg font-notoSans">
-              Tracking data helps both trainers and dog guardians in several
-              ways:
+              Tracking data helps both behavior professionals and dog guardians
+              in several ways:
               <ul className="list-disc pl-6 mt-2 space-y-2">
                 <li>Identify patterns in reactive behavior and triggers</li>
                 <li>Monitor the effectiveness of training interventions</li>

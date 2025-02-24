@@ -11,7 +11,7 @@ export function ProblemSolution() {
             </h2>
             <p className="mt-4 text-xl font-notoSans">
               with easy-to-use tracker connected to a desktop dashboard for
-              trainers!
+              behavior professionals!
             </p>
           </div>
 
@@ -126,8 +126,8 @@ export function ProblemSolution() {
                       <span className="font-semibold">
                         Synchronized dashboard
                       </span>{" "}
-                      giving trainers complete visibility into client data and
-                      progress
+                      giving behavior professionals complete visibility into
+                      client data and progress
                     </>
                   }
                 />

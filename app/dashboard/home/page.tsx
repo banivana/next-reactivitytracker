@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useUserProfile } from "@/utils/hooks/useUserProfile";
+import { useUser } from "@/utils/hooks/useUser";
 
 export default async function DashboardHomePage() {
-  const { user, profile } = await useUserProfile();
+  const { user, profile } = await useUser();
 
   return (
     <div className="space-y-6">

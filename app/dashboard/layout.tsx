@@ -2,14 +2,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home, Settings, LogOut } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
-import { useUserProfile } from "@/utils/hooks/useUserProfile";
+import { useUser } from "@/utils/hooks/useUser";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  await useUserProfile();
+  await useUser();
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -1,8 +1,7 @@
 import { createServerSupabaseClient } from "@/utils/supabase-server";
 import { redirect } from "next/navigation";
-import { cache } from "react";
 
-export const useUserProfile = cache(async () => {
+export const useUser = async () => {
   const supabase = createServerSupabaseClient();
 
   // Get the user
@@ -38,4 +37,4 @@ export const useUserProfile = cache(async () => {
     profile,
     isTrainer,
   };
-});
+};

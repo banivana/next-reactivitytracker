@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/auth/actions";
-import { useUserProfile } from "@/utils/hooks/useUserProfile";
 
 export default async function RestrictedPage() {
   return (

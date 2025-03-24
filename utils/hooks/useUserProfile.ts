@@ -1,8 +1,8 @@
 import { createServerSupabaseClient } from "@/utils/supabase-server";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { cache } from "react";
 
-export async function useUserProfile() {
+export const useUserProfile = cache(async () => {
   const supabase = createServerSupabaseClient();
 
   // Get the user
@@ -25,14 +25,10 @@ export async function useUserProfile() {
 
   if (profileError) {
     console.error("Error fetching profile:", profileError);
-    // We don't redirect here, just log the error
-    // This allows components to handle the error appropriately
   }
 
   const isTrainer = profile?.is_trainer === true;
 
-  // Redirect non-trainers to the restricted page
-  // If currentPath is provided, use it to avoid redirect loops
   if (!isTrainer) {
     redirect("/restricted");
   }
@@ -42,4 +38,4 @@ export async function useUserProfile() {
     profile,
     isTrainer,
   };
-}
+});

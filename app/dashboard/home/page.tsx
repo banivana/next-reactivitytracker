@@ -16,10 +16,17 @@ export default async function DashboardHomePage() {
     redirect("/login");
   }
 
-  // You can fetch additional data from Supabase here
-  // For example:
-  // const { data: userSettings } = await supabase.from('user_settings').select('*').eq('user_id', user.id).single()
-  // const { data: recentActivity } = await supabase.from('activities').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(5)
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", user.id)
+    .single();
+
+  if (profileError) {
+    // Handle error
+    console.error("Error fetching profile:", profileError);
+    return;
+  }
 
   return (
     <div className="space-y-6">
@@ -48,6 +55,19 @@ export default async function DashboardHomePage() {
                 {new Date(user.last_sign_in_at || "").toLocaleString()}
               </li>
             </ul>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Your Profile Data</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="p-4 bg-gray-100 rounded-md overflow-auto">
+            <pre className="text-xs whitespace-pre-wrap">
+              {JSON.stringify(profile, null, 2)}
+            </pre>
           </div>
         </CardContent>
       </Card>

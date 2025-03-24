@@ -1,18 +1,18 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home, Settings, LogOut } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
+import { useUserProfile } from "@/utils/hooks/useUserProfile";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  await useUserProfile();
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 w-64 bg-white border-r">
         <div className="flex flex-col h-full">
           <div className="p-6">
@@ -49,7 +49,6 @@ export default function DashboardLayout({
         </div>
       </div>
 
-      {/* Main content */}
       <div className="pl-64">
         <main className="p-6">{children}</main>
       </div>

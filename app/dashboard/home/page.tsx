@@ -1,32 +1,8 @@
-import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createServerSupabaseClient } from "@/utils/supabase-server";
+import { useUserProfile } from "@/utils/hooks/useUserProfile";
 
 export default async function DashboardHomePage() {
-  const supabase = createServerSupabaseClient();
-
-  // Get the user
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-
-  // If there's no user, redirect to login
-  if (error || !user) {
-    redirect("/login");
-  }
-
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", user.id)
-    .single();
-
-  if (profileError) {
-    // Handle error
-    console.error("Error fetching profile:", profileError);
-    return;
-  }
+  const { user, profile } = await useUserProfile();
 
   return (
     <div className="space-y-6">

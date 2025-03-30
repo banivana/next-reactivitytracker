@@ -1,5 +1,7 @@
 import { useUser } from "@/utils/hooks/useUser";
 import { createServerSupabaseClient } from "@/utils/supabase-server";
+import ClientJournal from "@/app/components/dashboard/ClientJournal";
+import { createClient } from "@supabase/supabase-js";
 
 export default async function Page({
   params,
@@ -10,6 +12,13 @@ export default async function Page({
 
   const { user } = await useUser();
   const supabase = await createServerSupabaseClient();
+
+  // Create admin client for user lookups
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  );
 
   // Check if the trainer has access to this client
   const { data: relationship, error } = await supabase
@@ -29,17 +38,20 @@ export default async function Page({
     return <div>Error loading client data.</div>;
   }
 
+  // Get client email for display
+  const { data: clientData } = await supabaseAdmin.auth.admin.getUserById(
+    userId
+  );
+  const clientEmail = clientData?.user?.email || "Unknown";
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Client Profile</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Client: {clientEmail}</h1>
+      </div>
+
       <div className="bg-white shadow overflow-hidden rounded-lg p-6">
-        <h2 className="text-xl mb-4">Client Information</h2>
-        <p>
-          <strong>Email:</strong>
-        </p>
-        <p>
-          <strong>Name:</strong>
-        </p>
+        <ClientJournal userId={userId} />
       </div>
     </div>
   );

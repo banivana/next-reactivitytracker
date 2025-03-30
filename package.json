@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@nextui-org/react": "^2.5.0-beta.26",
     "@nextui-org/system": "^2.3.0-beta.11",
     "@nextui-org/table": "^2.1.0-beta.12",

@@ -1,34 +1,18 @@
-import { createServerSupabaseClient } from "@/utils/supabase-server";
 import { useUser } from "@/utils/hooks/useUser";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
+import { useClientUsers } from "@/utils/hooks/useClientUsers";
 
 export default async function ClientsPage() {
-  const { user } = await useUser();
-  const supabase = await createServerSupabaseClient();
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  );
+  const { clients, error } = await useClientUsers();
 
-  const { data: clientUsers, error: clientsError } = await supabase
-    .from("trainer_client")
-    .select("client")
-    .eq("trainer", user.id);
-
-  if (clientsError) {
-    console.error("Error fetching client relationships:", clientsError);
+  if (error) {
     return <div>Error loading clients. Please try again later.</div>;
   }
 
-  // Extract the client IDs
-  const clientIds = clientUsers?.map((item) => item.client) || [];
-
   // If there are no clients, show the empty state right away
-  if (clientIds.length === 0) {
+  if (clients.length === 0) {
     return (
       <div className="space-y-6">
         <div className="flex justify-between items-center">
@@ -49,13 +33,6 @@ export default async function ClientsPage() {
         </div>
       </div>
     );
-  }
-
-  // Fetch the profiles for these clients
-  const clients = [];
-  for (const clientId of clientIds) {
-    const client = await supabaseAdmin.auth.admin.getUserById(clientId);
-    clients.push(client.data.user);
   }
 
   return (

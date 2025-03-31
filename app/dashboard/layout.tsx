@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Home, Settings, LogOut, Users } from "lucide-react";
+import { Home, Settings, LogOut, Users, ChevronDown } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
 import { useUser } from "@/utils/hooks/useUser";
+import { useClientUsers } from "@/utils/hooks/useClientUsers";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  await useUser();
+  const { user } = await useUser();
+  const { clients } = await useClientUsers();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -26,13 +28,28 @@ export default async function DashboardLayout({
               <Home className="w-5 h-5 mr-3" />
               Home
             </Link>
-            <Link
-              href="/dashboard/clients"
-              className="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100"
-            >
-              <Users className="w-5 h-5 mr-3" />
-              Clients
-            </Link>
+            <div className="space-y-1">
+              <Link
+                href="/dashboard/clients"
+                className="flex items-center justify-between px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100"
+              >
+                <div className="flex items-center">
+                  <Users className="w-5 h-5 mr-3" />
+                  Clients
+                </div>
+              </Link>
+              <div className="ml-8 space-y-1">
+                {clients.map((client) => (
+                  <Link
+                    key={client.id}
+                    href={`/dashboard/clients/${client.id}`}
+                    className="flex items-center px-4 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100"
+                  >
+                    {client.email}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <Link
               href="/dashboard/settings"
               className="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100"

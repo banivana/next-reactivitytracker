@@ -45,13 +45,24 @@ export default async function Page({
   const clientEmail = clientData?.user?.email || "Unknown";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Client: {clientEmail}</h1>
       </div>
 
-      <div className="bg-white shadow overflow-hidden rounded-lg p-6">
-        <ClientJournal userId={userId} />
+      <div className="flex gap-6 h-[calc(100vh-200px)]">
+        {/* Left panel - Journal */}
+        <div className="flex-1 bg-white shadow overflow-hidden rounded-lg">
+          <div className="h-full overflow-y-auto">
+            <ClientJournal userId={userId} />
+          </div>
+        </div>
+
+        {/* Right panel - Placeholder */}
+        <div className="flex-1 bg-white shadow overflow-hidden rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Analytics</h2>
+          <p className="text-gray-500">Coming soon!</p>
+        </div>
       </div>
     </div>
   );

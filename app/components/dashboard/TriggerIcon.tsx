@@ -52,11 +52,11 @@ export const TriggerIcon = ({
   // Determine color based on reaction level
   const reactionColor = reactionLevel
     ? reactionLevel === "green"
-      ? "#22C55E"
+      ? "#4ade80"
       : reactionLevel === "yellow"
       ? "#f8d600"
       : "#EF4444"
-    : "#EF4444"; // Default to red
+    : "#4ade80"; // Default to green instead of red
 
   // Map the FA6 icon or MCI icon to the corresponding FontAwesome icon
   if (triggerConfig.fa6) {

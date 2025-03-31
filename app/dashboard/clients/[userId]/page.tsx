@@ -47,8 +47,26 @@ export default async function Page({
   return (
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Client: {clientEmail}</h1>
+        <h1 className="text-2xl font-bold">Clients / {clientEmail}</h1>
       </div>
+
+      <nav className="flex gap-4 mb-6">
+        <button className="px-4 py-2 rounded-full bg-gray-100 font-medium">
+          Home
+        </button>
+        <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
+          Triggers
+        </button>
+        <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
+          Health
+        </button>
+        <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
+          Notes
+        </button>
+        <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
+          Graphs
+        </button>
+      </nav>
 
       <div className="flex gap-6 h-[calc(100vh-200px)]">
         {/* Left panel - Journal */}

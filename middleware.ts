@@ -45,15 +45,15 @@ export async function middleware(request: NextRequest) {
   }
 
   // If there's a session and the user is trying to access login/signup
-  if (
-    session &&
-    (request.nextUrl.pathname === "/login" ||
-      request.nextUrl.pathname === "/signup")
-  ) {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/dashboard";
-    return NextResponse.redirect(redirectUrl);
-  }
+  // if (
+  //   session &&
+  //   (request.nextUrl.pathname === "/login" ||
+  //     request.nextUrl.pathname === "/signup")
+  // ) {
+  //   const redirectUrl = request.nextUrl.clone();
+  //   redirectUrl.pathname = "/dashboard";
+  //   return NextResponse.redirect(redirectUrl);
+  // }
 
   return response;
 }

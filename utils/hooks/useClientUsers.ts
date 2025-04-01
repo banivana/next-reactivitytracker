@@ -2,6 +2,12 @@ import { createServerSupabaseClient } from "@/utils/supabase-server";
 import { useUser } from "@/utils/hooks/useUser";
 import { createClient } from "@supabase/supabase-js";
 
+export interface Client {
+  id: string;
+  email: string;
+  displayName: string;
+}
+
 export async function useClientUsers() {
   const { user } = await useUser();
   const supabase = await createServerSupabaseClient();
@@ -27,7 +33,17 @@ export async function useClientUsers() {
   const clients = [];
   for (const clientId of clientIds) {
     const client = await supabaseAdmin.auth.admin.getUserById(clientId);
-    clients.push(client.data.user);
+    const userData = client.data.user;
+
+    const displayName =
+      userData.user_metadata?.first_name && userData.user_metadata?.last_name
+        ? `${userData.user_metadata.first_name} ${userData.user_metadata.last_name}`
+        : userData.email?.split("@")[0] || "Unknown User";
+
+    clients.push({
+      ...userData,
+      displayName,
+    });
   }
 
   return { clients, error: null };

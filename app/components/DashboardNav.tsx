@@ -5,11 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Settings, LogOut, Users } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
 import { usePathname } from "next/navigation";
-
-interface Client {
-  id: string;
-  email: string;
-}
+import { Client } from "@/utils/hooks/useClientUsers";
 
 interface DashboardNavProps {
   clients: Client[];
@@ -62,7 +58,7 @@ export function DashboardNav({ clients }: DashboardNavProps) {
                     : ""
                 }`}
               >
-                {client.email}
+                {client.displayName}
               </Link>
             ))}
           </div>

@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from "@/utils/supabase-server";
-import { useUser } from "@/utils/hooks/useUser";
+import { getUser } from "@/utils/server/getUser";
 import { createClient } from "@supabase/supabase-js";
 
 export interface Client {
@@ -8,8 +8,8 @@ export interface Client {
   displayName: string;
 }
 
-export async function useClientUsers() {
-  const { user } = await useUser();
+export async function getClientUsers() {
+  const { user } = await getUser();
   const supabase = await createServerSupabaseClient();
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,

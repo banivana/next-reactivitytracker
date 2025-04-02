@@ -1,11 +1,10 @@
-import { useUser } from "@/utils/hooks/useUser";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
-import { useClientUsers } from "@/utils/hooks/useClientUsers";
+import { getClientUsers } from "@/utils/server/getClientUsers";
 
 export default async function ClientsPage() {
-  const { clients, error } = await useClientUsers();
+  const { clients, error } = await getClientUsers();
 
   if (error) {
     return <div>Error loading clients. Please try again later.</div>;

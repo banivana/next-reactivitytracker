@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from "@/utils/supabase-server";
 import { redirect } from "next/navigation";
 
-export const useUser = async () => {
+export const getUser = async () => {
   const supabase = await createServerSupabaseClient();
 
   // Get the user

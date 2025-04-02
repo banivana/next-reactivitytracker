@@ -1,12 +1,12 @@
 import { createServerSupabaseClient } from "@/utils/supabase-server";
-import { useUser } from "@/utils/hooks/useUser";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { getUser } from "@/utils/server/getUser";
 
 export default async function AddClientPage() {
-  const { user } = await useUser();
+  const { user } = await getUser();
 
   async function addClient(formData: FormData) {
     "use server";
@@ -93,7 +93,7 @@ export default async function AddClientPage() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Client's Email Address
+              Client&apos;s Email Address
             </label>
             <input
               type="email"

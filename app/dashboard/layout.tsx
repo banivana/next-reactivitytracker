@@ -1,14 +1,14 @@
-import { useUser } from "@/utils/hooks/useUser";
-import { useClientUsers } from "@/utils/hooks/useClientUsers";
 import { DashboardNav } from "../components/DashboardNav";
+import { getUser } from "@/utils/server/getUser";
+import { getClientUsers } from "@/utils/server/getClientUsers";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  await useUser();
-  const { clients } = await useClientUsers();
+  await getUser();
+  const { clients } = await getClientUsers();
 
   return (
     <div className="min-h-screen bg-gray-50">

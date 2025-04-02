@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Settings, LogOut, Users } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
 import { usePathname } from "next/navigation";
-import { Client } from "@/utils/hooks/useClientUsers";
+import { Client } from "@/utils/server/getClientUsers";
 
 interface DashboardNavProps {
   clients: Client[];

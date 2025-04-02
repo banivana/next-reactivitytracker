@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 import { TriggerIcon } from "./TriggerIcon";

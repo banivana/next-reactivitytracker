@@ -1,11 +1,10 @@
-import { useUser } from "@/utils/hooks/useUser";
-import { createServerSupabaseClient } from "@/utils/supabase-server";
 import ClientJournal from "@/app/components/dashboard/ClientJournal";
 import { createClient } from "@supabase/supabase-js";
 import ZonesPieChart from "@/app/components/dashboard/ZonesPieChart";
 import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistribution";
 import { getClientData } from "@/app/hooks/useClientData";
 import { checkTrainerClientAccess } from "@/app/hooks/useTrainerClientAccess";
+import { getUser } from "@/utils/server/getUser";
 
 export default async function Page({
   params,
@@ -13,7 +12,7 @@ export default async function Page({
   params: Promise<{ userId: string }>;
 }) {
   const { userId } = await params;
-  const { user } = await useUser();
+  const { user } = await getUser();
 
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -41,7 +40,6 @@ export default async function Page({
   const { data: clientUserData } = await supabaseAdmin.auth.admin.getUserById(
     userId
   );
-  const clientEmail = clientUserData?.user?.email || "Unknown";
 
   return (
     <div className="space-y-6 p-6">

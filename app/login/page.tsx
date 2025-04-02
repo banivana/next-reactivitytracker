@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function Login() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -84,5 +84,19 @@ export default function Login() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

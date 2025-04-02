@@ -5,7 +5,7 @@ import { faHeart, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 import { TriggerIcon } from "./TriggerIcon";
 import { useState } from "react";
 
-const DAYS_LOAD_LIMIT = 3;
+const DAYS_LOAD_LIMIT = 10;
 
 type Event = {
   id: number;

@@ -21,7 +21,7 @@ export function DashboardNav({ clients }: DashboardNavProps) {
       <div className="p-6">
         <h2 className="text-xl font-bold">Dashboard</h2>
       </div>
-      <nav className="flex-1 px-4 space-y-1">
+      <nav className="flex-1 px-4 space-y-1 overflow-y-auto max-h-[calc(100vh-160px)]">
         <Link
           href="/dashboard/home"
           className={`flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100 ${

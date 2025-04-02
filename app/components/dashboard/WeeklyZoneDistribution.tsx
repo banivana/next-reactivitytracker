@@ -70,7 +70,7 @@ function processWeeklyTriggers(triggers: Trigger[]) {
   return Object.values(eventsByWeek)
     .sort(
       (a: any, b: any) =>
-        new Date(b.week_start).getTime() - new Date(a.week_start).getTime()
+        new Date(a.week_start).getTime() - new Date(b.week_start).getTime()
     )
     .slice(0, 5); // Last 5 weeks
 }

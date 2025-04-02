@@ -15,7 +15,8 @@ export const getUser = async () => {
     redirect("/login");
   }
 
-  // Get user profile
+  console.log("getting profile for", user.id);
+
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")

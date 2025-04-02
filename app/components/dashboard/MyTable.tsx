@@ -10,7 +10,6 @@ import {
 } from "@nextui-org/table";
 
 export default function MyTable({ events }: { events: any }) {
-  console.log(events);
   return (
     <div className="m-8">
       <Table>

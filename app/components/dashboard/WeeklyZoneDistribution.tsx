@@ -10,13 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Trigger = {
   id: number;
@@ -36,92 +30,98 @@ const colors = {
   red: "hsl(12 76% 61%)",
 };
 
+// Process an array of triggers to group by week
+function processWeeklyTriggers(triggers: Trigger[]) {
+  if (triggers.length === 0) return [];
+
+  // Group events by week
+  const eventsByWeek = triggers.reduce<Record<string, any>>(
+    (weeks, trigger) => {
+      // Get the week start date (Sunday) for this trigger
+      const triggerDate = new Date(trigger.date);
+      const weekStart = new Date(triggerDate);
+      weekStart.setDate(triggerDate.getDate() - triggerDate.getDay());
+      const weekKey = weekStart.toISOString().split("T")[0];
+
+      if (!weeks[weekKey]) {
+        weeks[weekKey] = {
+          week_start: weekKey,
+          week: formatWeekLabel(weekStart), // Can customize label format
+          total: 0,
+          green: 0,
+          yellow: 0,
+          red: 0,
+        };
+      }
+
+      weeks[weekKey].total++;
+
+      const level = trigger.level_of_reaction.toLowerCase();
+      if (level.includes("green")) weeks[weekKey].green++;
+      else if (level.includes("yellow")) weeks[weekKey].yellow++;
+      else if (level.includes("red")) weeks[weekKey].red++;
+
+      return weeks;
+    },
+    {}
+  );
+
+  // Convert to array and sort by week
+  return Object.values(eventsByWeek)
+    .sort(
+      (a: any, b: any) =>
+        new Date(b.week_start).getTime() - new Date(a.week_start).getTime()
+    )
+    .slice(0, 5); // Last 5 weeks
+}
+
+// Helper to format week labels
+function formatWeekLabel(date) {
+  const weekStart = new Date(date);
+  const weekEnd = new Date(date);
+  weekEnd.setDate(weekStart.getDate() + 6);
+
+  const startDay = weekStart.getDate();
+  const endDay = weekEnd.getDate();
+
+  // Get month name abbreviation
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const startMonth = monthNames[weekStart.getMonth()];
+  const endMonth = monthNames[weekEnd.getMonth()];
+
+  // If the week spans two different months
+  if (startMonth !== endMonth) {
+    return `${startDay} ${startMonth}-${endDay} ${endMonth}`;
+  }
+
+  return `${startDay}-${endDay} ${startMonth}`;
+}
+
 export default function WeeklyZoneDistribution({
   triggers,
 }: {
   triggers: Trigger[];
 }) {
-  const weeklyData = useMemo(() => {
-    // Find the most recent trigger date
-    if (triggers.length === 0) return [];
-
-    let mostRecentDate = new Date(0); // Start with epoch time
-    for (const trigger of triggers) {
-      const triggerDate = new Date(trigger.date);
-      if (triggerDate > mostRecentDate) {
-        mostRecentDate = triggerDate;
-      }
-    }
-
-    // Get dates for the last 5 weeks based on the most recent trigger date
-    const weekLabels = [];
-    const startDates = [];
-    const today = new Date();
-
-    for (let i = 4; i >= 0; i--) {
-      const date = new Date(mostRecentDate);
-      date.setDate(mostRecentDate.getDate() - i * 7);
-      const startDate = new Date(date);
-      startDate.setDate(date.getDate() - 6);
-      startDates.push(startDate);
-
-      // Calculate weeks passed since today
-      const weeksPassed = Math.floor(
-        (today.getTime() - date.getTime()) / (7 * 24 * 60 * 60 * 1000)
-      );
-
-      if (weeksPassed === 0) {
-        weekLabels.push("This week");
-      } else if (weeksPassed === 1) {
-        weekLabels.push("1 week ago");
-      } else {
-        weekLabels.push(`${weeksPassed} weeks ago`);
-      }
-    }
-
-    // Initialize data structure with counts set to zero
-    const weekly = weekLabels.map((week, index) => ({
-      week,
-      green: 0,
-      yellow: 0,
-      red: 0,
-      startDate: startDates[index],
-    }));
-
-    // Count triggers for each week
-    for (const trigger of triggers) {
-      const triggerDate = new Date(trigger.date);
-
-      for (let i = 0; i < weekly.length; i++) {
-        const weekEnd =
-          i < weekly.length - 1
-            ? weekly[i + 1].startDate
-            : new Date(mostRecentDate);
-        weekEnd.setDate(weekEnd.getDate() + 1); // Include the end date in the range
-
-        if (triggerDate >= weekly[i].startDate && triggerDate < weekEnd) {
-          const level = trigger.level_of_reaction.toLowerCase();
-          if (level.includes("green")) {
-            weekly[i].green++;
-          } else if (level.includes("yellow")) {
-            weekly[i].yellow++;
-          } else if (level.includes("red")) {
-            weekly[i].red++;
-          }
-          break;
-        }
-      }
-    }
-
-    return weekly;
-  }, [triggers]);
+  const weeklyData = useMemo(() => processWeeklyTriggers(triggers), [triggers]);
 
   if (triggers.length === 0) {
     return (
       <Card className="w-full">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Weekly Zone Distribution</CardTitle>
-          <CardDescription>Last 5 weeks</CardDescription>
         </CardHeader>
         <CardContent className="pb-2">
           <div className="h-[400px] flex items-center justify-center">
@@ -136,7 +136,6 @@ export default function WeeklyZoneDistribution({
     <Card className="w-full">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg">Weekly Zone Distribution</CardTitle>
-        <CardDescription>Last 5 weeks</CardDescription>
       </CardHeader>
       <CardContent className="pb-2">
         <div className="h-[400px]">

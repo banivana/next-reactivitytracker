@@ -2,6 +2,8 @@ import { useUser } from "@/utils/hooks/useUser";
 import { createServerSupabaseClient } from "@/utils/supabase-server";
 import ClientJournal from "@/app/components/dashboard/ClientJournal";
 import { createClient } from "@supabase/supabase-js";
+import ZonesPieChart from "@/app/components/dashboard/ZonesPieChart";
+import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistribution";
 
 export default async function Page({
   params,
@@ -68,7 +70,7 @@ export default async function Page({
         </button>
       </nav>
 
-      <div className="flex gap-6 h-[calc(100vh-200px)]">
+      <div className="flex gap-6 pb-4">
         {/* Left panel - Journal */}
         <div className="flex-1 bg-white shadow overflow-hidden rounded-lg">
           <div className="h-full overflow-y-auto">
@@ -76,10 +78,13 @@ export default async function Page({
           </div>
         </div>
 
-        {/* Right panel - Placeholder */}
-        <div className="flex-1 bg-white shadow overflow-hidden rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Analytics</h2>
-          <p className="text-gray-500">Coming soon!</p>
+        {/* Right panel - Analytics */}
+        <div className="flex-1 space-y-4">
+          <div className="bg-white shadow overflow-hidden rounded-lg p-6 space-y-4">
+            <h3 className="text-lg font-medium">Zones Distribution</h3>
+            <ZonesPieChart />
+          </div>
+          <WeeklyZoneDistribution />
         </div>
       </div>
     </div>

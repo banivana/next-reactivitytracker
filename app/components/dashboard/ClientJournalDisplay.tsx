@@ -3,6 +3,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 import { TriggerIcon } from "./TriggerIcon";
+import { useState } from "react";
+
+const DAYS_LOAD_LIMIT = 3;
 
 type Event = {
   id: number;
@@ -39,12 +42,20 @@ type Day = {
 };
 
 export default function ClientJournalDisplay({ days }: { days: Day[] }) {
+  const [visibleDays, setVisibleDays] = useState(DAYS_LOAD_LIMIT);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `${date.getDate()} ${date.toLocaleString("default", {
       month: "long",
     })} ${date.getFullYear()}`;
   };
+
+  const handleShowMore = () => {
+    setVisibleDays((prev) => Math.min(prev + DAYS_LOAD_LIMIT, days.length));
+  };
+
+  const displayedDays = days.slice(0, visibleDays);
 
   return (
     <div className="space-y-6 p-6">
@@ -54,7 +65,7 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
         </p>
       ) : (
         <div className="space-y-8">
-          {days.map((day) => (
+          {displayedDays.map((day) => (
             <div key={day.date} className="space-y-4">
               <h2 className="ml-4 text-lg font-semibold">
                 {formatDate(day.date)}
@@ -103,13 +114,13 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="text-left text-sm font-normal text-gray-400 pb-2 pr-4 w-[30%]">
+                        <th className="text-left text-sm font-normal text-gray-400 pb-2 pr-4 w-1/4">
                           Location
                         </th>
-                        <th className="text-left text-sm font-normal text-gray-400 pb-2 px-4 w-[10%]">
+                        <th className="text-left text-sm font-normal text-gray-400 pb-2 px-4 w-1/12">
                           Trigger
                         </th>
-                        <th className="text-left text-sm font-normal text-gray-400 pb-2 pl-4">
+                        <th className="text-left text-sm font-normal text-gray-400 pb-2 pl-4 w-7/12">
                           Description
                         </th>
                       </tr>
@@ -117,7 +128,7 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
                     <tbody className="divide-y-8 divide-transparent">
                       {day.triggers.map((trigger) => (
                         <tr key={trigger.id}>
-                          <td className="text-sm text-gray-500 truncate pr-4 py-2">
+                          <td className="text-sm text-gray-500 break-words pr-4 py-2">
                             {trigger.location}
                           </td>
                           <td className="px-4 py-2">
@@ -140,6 +151,17 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
               )}
             </div>
           ))}
+
+          {days.length > visibleDays && (
+            <div className="flex justify-center">
+              <button
+                onClick={handleShowMore}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Show More
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -29,10 +29,6 @@ export const getUser = async () => {
 
   const isTrainer = profile?.is_trainer === true;
 
-  if (!isTrainer) {
-    redirect("/restricted");
-  }
-
   return {
     user,
     profile,

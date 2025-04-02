@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from "@/utils/supabase-server";
+import { createClient } from "@supabase/supabase-js";
 
 type Event = {
   id: number;
@@ -40,11 +40,20 @@ export type ClientData = {
   healthRes: Health[];
   notesRes: Note[];
   error: Error | null;
+  clientUserData: any;
 };
 
 export async function getClientData(userId: string): Promise<ClientData> {
-  const supabase = await createServerSupabaseClient();
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
   let error = null;
+
+  const { data: clientUserData } = await supabase.auth.admin.getUserById(
+    userId,
+  );
 
   // Fetch events data
   const { data: triggersRes, error: eventsError } = await supabase
@@ -139,5 +148,6 @@ export async function getClientData(userId: string): Promise<ClientData> {
     healthRes: healthRes || [],
     notesRes: notesRes || [],
     error,
+    clientUserData,
   };
 }

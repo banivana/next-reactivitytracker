@@ -1,13 +1,18 @@
 import { DashboardNav } from "../components/DashboardNav";
 import { getUser } from "@/utils/server/getUser";
 import { getClientUsers } from "@/utils/server/getClientUsers";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  await getUser();
+  const { isTrainer } = await getUser();
+  if (!isTrainer) {
+    redirect("/restricted");
+  }
+
   const { clients } = await getClientUsers();
 
   return (

@@ -1,5 +1,4 @@
 import ClientJournal from "@/app/components/dashboard/ClientJournal";
-import { createClient } from "@supabase/supabase-js";
 import ZonesPieChart from "@/app/components/dashboard/ZonesPieChart";
 import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistribution";
 import { getClientData } from "@/app/hooks/useClientData";
@@ -13,13 +12,6 @@ export default async function Page({
 }) {
   const { userId } = await params;
   const { user } = await getUser();
-
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  );
-
   const { hasAccess } = await checkTrainerClientAccess(user.id, userId);
 
   if (!hasAccess) {
@@ -36,16 +28,11 @@ export default async function Page({
     );
   }
 
-  // Get client email for display
-  const { data: clientUserData } = await supabaseAdmin.auth.admin.getUserById(
-    userId
-  );
-
   return (
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">
-          Clients / {clientUserData.user.email}
+          Clients / {clientData.clientUserData.user.email}
         </h1>
       </div>
 

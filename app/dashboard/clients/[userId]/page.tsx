@@ -41,6 +41,9 @@ export default async function Page({
           Home
         </button>
         <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
+          Journal
+        </button>
+        <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
           Triggers
         </button>
         <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
@@ -56,10 +59,8 @@ export default async function Page({
 
       <div className="flex gap-6 pb-4">
         {/* Left panel - Journal */}
-        <div className="flex-1 bg-white shadow overflow-hidden rounded-lg">
-          <div className="h-full overflow-y-auto">
-            <ClientJournal days={clientData.days} />
-          </div>
+        <div className="flex-1">
+          <ClientJournal days={clientData.days} />
         </div>
 
         {/* Right panel - Analytics */}

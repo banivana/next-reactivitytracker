@@ -83,7 +83,7 @@ export default async function Page({
             <h3 className="text-lg font-medium">Zones Distribution</h3>
             <ZonesPieChart triggers={clientData.triggersRes} />
           </div>
-          <WeeklyZoneDistribution />
+          <WeeklyZoneDistribution triggers={clientData.triggersRes} />
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   BarChart,
   Bar,
@@ -20,39 +21,16 @@ import {
 } from "@/components/ui/card";
 import { TrendingUp } from "lucide-react";
 
-// Mock data - replaced with count data instead of percentages
-const data = [
-  {
-    week: "5 weeks ago",
-    green: 5,
-    yellow: 5,
-    red: 3,
-  },
-  {
-    week: "4 weeks ago",
-    green: 15,
-    yellow: 4,
-    red: 2,
-  },
-  {
-    week: "3 weeks ago",
-    green: 10,
-    yellow: 6,
-    red: 4,
-  },
-  {
-    week: "2 weeks ago",
-    green: 18,
-    yellow: 3,
-    red: 2,
-  },
-  {
-    week: "1 week ago",
-    green: 24,
-    yellow: 7,
-    red: 3,
-  },
-];
+type Trigger = {
+  id: number;
+  created_at: string;
+  user_id: string;
+  date: string;
+  trigger_type: string;
+  level_of_reaction: string;
+  description: string;
+  location: string;
+};
 
 // Custom colors for chart zones
 const colors = {
@@ -61,7 +39,102 @@ const colors = {
   red: "hsl(12 76% 61%)",
 };
 
-export default function WeeklyZoneDistribution() {
+export default function WeeklyZoneDistribution({
+  triggers,
+}: {
+  triggers: Trigger[];
+}) {
+  const weeklyData = useMemo(() => {
+    // Find the most recent trigger date
+    if (triggers.length === 0) return [];
+
+    let mostRecentDate = new Date(0); // Start with epoch time
+    for (const trigger of triggers) {
+      const triggerDate = new Date(trigger.date);
+      if (triggerDate > mostRecentDate) {
+        mostRecentDate = triggerDate;
+      }
+    }
+
+    // Get dates for the last 5 weeks based on the most recent trigger date
+    const weekLabels = [];
+    const startDates = [];
+    const today = new Date();
+
+    for (let i = 4; i >= 0; i--) {
+      const date = new Date(mostRecentDate);
+      date.setDate(mostRecentDate.getDate() - i * 7);
+      const startDate = new Date(date);
+      startDate.setDate(date.getDate() - 6);
+      startDates.push(startDate);
+
+      // Calculate weeks passed since today
+      const weeksPassed = Math.floor(
+        (today.getTime() - date.getTime()) / (7 * 24 * 60 * 60 * 1000)
+      );
+
+      if (weeksPassed === 0) {
+        weekLabels.push("This week");
+      } else if (weeksPassed === 1) {
+        weekLabels.push("1 week ago");
+      } else {
+        weekLabels.push(`${weeksPassed} weeks ago`);
+      }
+    }
+
+    // Initialize data structure with counts set to zero
+    const weekly = weekLabels.map((week, index) => ({
+      week,
+      green: 0,
+      yellow: 0,
+      red: 0,
+      startDate: startDates[index],
+    }));
+
+    // Count triggers for each week
+    for (const trigger of triggers) {
+      const triggerDate = new Date(trigger.date);
+
+      for (let i = 0; i < weekly.length; i++) {
+        const weekEnd =
+          i < weekly.length - 1
+            ? weekly[i + 1].startDate
+            : new Date(mostRecentDate);
+        weekEnd.setDate(weekEnd.getDate() + 1); // Include the end date in the range
+
+        if (triggerDate >= weekly[i].startDate && triggerDate < weekEnd) {
+          const level = trigger.level_of_reaction.toLowerCase();
+          if (level.includes("green")) {
+            weekly[i].green++;
+          } else if (level.includes("yellow")) {
+            weekly[i].yellow++;
+          } else if (level.includes("red")) {
+            weekly[i].red++;
+          }
+          break;
+        }
+      }
+    }
+
+    return weekly;
+  }, [triggers]);
+
+  if (triggers.length === 0) {
+    return (
+      <Card className="w-full">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg">Weekly Zone Distribution</CardTitle>
+          <CardDescription>Last 5 weeks</CardDescription>
+        </CardHeader>
+        <CardContent className="pb-2">
+          <div className="h-[400px] flex items-center justify-center">
+            No trigger data available
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
@@ -72,7 +145,7 @@ export default function WeeklyZoneDistribution() {
         <div className="h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data}
+              data={weeklyData}
               margin={{
                 top: 20,
                 right: 0,

@@ -58,7 +58,7 @@ export function DashboardNav({ clients }: DashboardNavProps) {
                     : ""
                 }`}
               >
-                {client.displayName}
+                {client.first_name} {client.last_name}
               </Link>
             ))}
           </div>

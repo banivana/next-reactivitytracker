@@ -2,7 +2,7 @@ import { createServerSupabaseClient } from "@/utils/supabase-server";
 
 export type TrainerClientAccessResult = {
   hasAccess: boolean;
-  relationship: any | null;
+  trainerClientData: any | null;
   error: Error | null;
 };
 
@@ -13,7 +13,7 @@ export async function checkTrainerClientAccess(
   const supabase = await createServerSupabaseClient();
 
   // Check if the trainer has access to this client
-  const { data: relationship, error } = await supabase
+  const { data, error } = await supabase
     .from("trainer_client")
     .select("*")
     .eq("trainer", trainerId)
@@ -24,14 +24,14 @@ export async function checkTrainerClientAccess(
     console.error("Error checking trainer-client relationship:", error);
     return {
       hasAccess: false,
-      relationship: null,
+      trainerClientData: null,
       error,
     };
   }
 
   return {
-    hasAccess: !!relationship,
-    relationship,
+    hasAccess: !!data,
+    trainerClientData: data,
     error: null,
   };
 }

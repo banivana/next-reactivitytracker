@@ -1,7 +1,7 @@
 import ClientJournal from "@/app/components/dashboard/ClientJournal";
 import ZonesPieChart from "@/app/components/dashboard/ZonesPieChart";
 import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistribution";
-import { getClientData } from "@/app/hooks/useClientData";
+import { getClientData } from "@/app/hooks/getClientData";
 import { checkTrainerClientAccess } from "@/app/hooks/useTrainerClientAccess";
 import { getUser } from "@/utils/server/getUser";
 
@@ -12,7 +12,10 @@ export default async function Page({
 }) {
   const { userId } = await params;
   const { user } = await getUser();
-  const { hasAccess } = await checkTrainerClientAccess(user.id, userId);
+  const { hasAccess, trainerClientData } = await checkTrainerClientAccess(
+    user.id,
+    userId
+  );
 
   if (!hasAccess) {
     return <div>Error loading client data.</div>;
@@ -32,7 +35,7 @@ export default async function Page({
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">
-          Clients / {clientData.clientUserData.user.email}
+          Clients / {trainerClientData.first_name} {trainerClientData.last_name}
         </h1>
       </div>
 

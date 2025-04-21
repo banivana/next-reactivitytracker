@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
 import Script from "next/script";
-import { LoadingProgress } from "@/components/LoadingProgress";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -32,7 +31,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ReactivityTracker | Help your clients with dog reactivity",
+  title: "ReactivityTracker | Help your clients with dog reactivity",
   description:
     "Every behavior tells a story—use data-driven insights to improve training and enhance well-being",
 };
@@ -63,7 +62,6 @@ export default function RootLayout({
           `}
         </Script>
         <NextUIProvider>
-          <LoadingProgress />
           <main className="flex-1">{children}</main>
         </NextUIProvider>
       </body>

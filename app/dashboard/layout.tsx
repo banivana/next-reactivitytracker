@@ -2,6 +2,7 @@ import { DashboardNav } from "../components/DashboardNav";
 import { getUser } from "@/utils/server/getUser";
 import { getClientUsers } from "@/utils/server/getClientUsers";
 import { redirect } from "next/navigation";
+import { LoadingProgress } from "@/components/LoadingProgress";
 
 export default async function DashboardLayout({
   children,
@@ -17,6 +18,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <LoadingProgress />
       <div className="fixed inset-y-0 left-0 w-64 bg-white border-r">
         <DashboardNav clients={clients} />
       </div>

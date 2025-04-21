@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
 import Script from "next/script";
+import { LoadingProgress } from "@/components/LoadingProgress";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({
           `}
         </Script>
         <NextUIProvider>
+          <LoadingProgress />
           <main className="flex-1">{children}</main>
         </NextUIProvider>
       </body>

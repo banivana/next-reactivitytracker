@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
+import { Users, Pencil } from "lucide-react";
 import { getClientUsers } from "@/utils/server/getClientUsers";
 
 export default async function ClientsPage() {
@@ -81,12 +81,20 @@ export default async function ClientsPage() {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link
-                    href={`/dashboard/clients/${client.id}`}
-                    className="text-indigo-600 hover:text-indigo-900"
-                  >
-                    View
-                  </Link>
+                  <div className="flex justify-end gap-4">
+                    <Link
+                      href={`/dashboard/clients/${client.id}`}
+                      className="text-indigo-600 hover:text-indigo-900"
+                    >
+                      View
+                    </Link>
+                    <Link
+                      href={`/dashboard/clients/${client.id}/edit`}
+                      className="text-gray-600 hover:text-gray-900"
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))}

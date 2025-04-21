@@ -4,6 +4,9 @@ import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistrib
 import { getClientData } from "@/app/hooks/getClientData";
 import { checkTrainerClientAccess } from "@/app/hooks/useTrainerClientAccess";
 import { getUser } from "@/utils/server/getUser";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
 
 export default async function Page({
   params,
@@ -37,6 +40,12 @@ export default async function Page({
         <h1 className="text-2xl font-bold">
           Clients / {trainerClientData.first_name} {trainerClientData.last_name}
         </h1>
+        <Button asChild size="sm" variant="outline">
+          <Link href={`/dashboard/clients/${userId}/edit`}>
+            <Pencil className="mr-2 h-4 w-4" />
+            Edit Client
+          </Link>
+        </Button>
       </div>
 
       <nav className="flex gap-4 mb-6">

@@ -19,10 +19,7 @@ export function LoadingProgress() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const handleStop = () => {
-      NProgress.done();
-    };
-    handleStop();
+    NProgress.done();
   }, [pathname, searchParams]);
 
   useEffect(() => {

@@ -3,11 +3,13 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export function FooterSection() {
   return (
     <footer className="py-24 px-4 md:px-6 lg:px-8 bg-[#FAFAFA]">
-      <div className="mx-auto max-w-7xl flex flex-col lg:flex-row lg: justify-between items-center gap-10">
+      <div className="mx-auto max-w-7xl flex flex-col lg:flex-row justify-between items-center gap-10">
         <div className="mx-auto max-w-7xl flex flex-col items-center">
           <Link className="cursor-pointer" href="#hero">
             <Image
@@ -24,7 +26,7 @@ export function FooterSection() {
             <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
               <Button
                 variant="secondary"
-                className=" bg-white border-1 border-black text-black hover:bg-[#FDB813]/90 rounded-2xl font-ubuntu"
+                className="bg-white border-1 border-black text-black hover:bg-[#FDB813]/90 rounded-2xl font-ubuntu"
               >
                 Join Now!
               </Button>
@@ -52,6 +54,23 @@ export function FooterSection() {
             >
               Contact
             </Link>
+            <Link
+              href="#contact"
+              className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
+            >
+              Newsletter
+            </Link>
+            <div className="flex items-center">
+              <span className="text-gray-600 font-ubuntu mr-2">Follow us:</span>
+              <a
+                href="https://www.instagram.com/reactivitytracker/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#FDB813] transition-colors"
+              >
+                <FontAwesomeIcon icon={faInstagram} size="lg" />
+              </a>
+            </div>
           </nav>
         </div>
       </div>

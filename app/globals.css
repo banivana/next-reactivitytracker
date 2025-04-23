@@ -62,6 +62,10 @@ body {
   }
 }
 
+.formkit-form {
+  max-width: 100% !important;
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -14,9 +14,9 @@ export default function Home() {
       <HeroSection />
       <ProblemSolution />
       <FeaturesSection />
-      <ContactSection />
       <AboutSection />
       <FAQSection />
+      <ContactSection />
       <FooterSection />
     </main>
   );

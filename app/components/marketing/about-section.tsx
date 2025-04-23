@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export function AboutSection() {
   return (
-    <section className="py-24 px-4 md:px-6 lg:px-8" id="about">
+    <section
+      className="py-24 px-4 mx-2 md:px-6 lg:px-8  bg-[#FAFAFA] rounded-[100px] overflow-hidden border border-[#E1E1E1]"
+      id="about"
+    >
       <div className="flex flex-col gap-20 mx-auto max-w-7xl">
         {/* Penny's Story */}
         <div className="flex flex-col md:flex-col lg:flex-row gap-20 items-center">

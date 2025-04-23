@@ -31,7 +31,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ReactivityTracker | Help your clients with dog reactivity",
+  title: "ReactivityTracker | Help your clients with dog reactivity",
   description:
     "Every behavior tells a story—use data-driven insights to improve training and enhance well-being",
 };

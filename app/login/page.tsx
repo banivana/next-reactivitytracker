@@ -114,6 +114,23 @@ function LoginForm() {
                 "Sign In"
               )}
             </Button>
+            <button
+              type="button"
+              className="text-sm text-blue-500 hover:underline"
+              onClick={async () => {
+                const supabase = createClient();
+                try {
+                  const result = await supabase.auth.signInWithOAuth({
+                    provider: "apple",
+                  });
+                  console.log(result);
+                } catch (error) {
+                  console.error("Error signing in with Apple:", error);
+                }
+              }}
+            >
+              test apple
+            </button>
           </form>
         </CardContent>
       </Card>

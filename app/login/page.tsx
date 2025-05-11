@@ -122,6 +122,9 @@ function LoginForm() {
                 try {
                   const result = await supabase.auth.signInWithOAuth({
                     provider: "apple",
+                    options: {
+                      redirectTo: `https://reactivitytracker.com/auth/callback`,
+                    },
                   });
                   console.log(result);
                 } catch (error) {

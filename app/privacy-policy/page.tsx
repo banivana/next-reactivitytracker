@@ -70,8 +70,8 @@ export default function PrivacyPolicy() {
                       <span className="font-medium text-gray-800 mr-2">
                         Dog Trigger Data:
                       </span>
-                      Information about your dog's triggers, including type,
-                      date, and descriptions
+                      Information about your dog&apos;s triggers, including
+                      type, date, and descriptions
                     </li>
                     <li className="flex items-start">
                       <span className="font-medium text-gray-800 mr-2">
@@ -214,7 +214,9 @@ export default function PrivacyPolicy() {
               </h2>
               <div className="bg-gray-50 p-4 rounded-lg">
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Payment processing is handled by Apple's App Store</li>
+                  <li>
+                    • Payment processing is handled by Apple&apos;s App Store
+                  </li>
                   <li>• We do not store your payment information</li>
                   <li>
                     • Subscription data is used only to provide premium features
@@ -225,7 +227,7 @@ export default function PrivacyPolicy() {
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                Children's Privacy
+                Children&apos;s Privacy
               </h2>
               <p className="text-gray-700">
                 Our app is not intended for children under 13. We do not
@@ -240,7 +242,7 @@ export default function PrivacyPolicy() {
               <p className="text-gray-700">
                 We may update this Privacy Policy from time to time. We will
                 notify you of any changes by posting the new Privacy Policy
-                within the app and updating the "Last updated" date.
+                within the app and updating the &quot;Last updated&quot; date.
               </p>
             </section>
 

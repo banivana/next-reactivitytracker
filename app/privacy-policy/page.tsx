@@ -258,7 +258,7 @@ export default function PrivacyPolicy() {
                 <div className="space-y-2">
                   <p className="text-gray-800">
                     <span className="font-medium">Email:</span>{" "}
-                    [hello@reactivitytracker.com]
+                    hello@reactivitytracker.com
                   </p>
                   <p className="text-gray-800">
                     <span className="font-medium">Website:</span>{" "}

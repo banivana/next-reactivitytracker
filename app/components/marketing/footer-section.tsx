@@ -9,7 +9,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 export function FooterSection() {
   return (
     <footer className="py-24 px-4 md:px-6 lg:px-8 bg-[#FAFAFA]">
-      <div className="mx-auto max-w-7xl flex flex-col lg:flex-row justify-between items-center gap-10">
+      <div className="mx-auto max-w-7xl flex flex-col lg:flex-row justify-between items-start gap-10">
         <div className="mx-auto max-w-7xl flex flex-col items-center">
           <Link className="cursor-pointer" href="#hero">
             <Image
@@ -71,6 +71,23 @@ export function FooterSection() {
                 <FontAwesomeIcon icon={faInstagram} size="lg" />
               </a>
             </div>
+          </nav>
+        </div>
+        <div className="mx-auto text-left">
+          <h3 className="text-lg font-bold mb-4 font-notoSans">LEGAL</h3>
+          <nav className="flex flex-col gap-3">
+            <Link
+              href="/privacy"
+              className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms-of-service"
+              className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
+            >
+              Terms of Service
+            </Link>
           </nav>
         </div>
       </div>

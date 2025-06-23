@@ -16,7 +16,7 @@ export function ContactSection() {
 
     return () => {
       if (convertKitForm) {
-        convertKitForm.removeChild(script);
+        script?.remove();
       }
     };
   }, []);

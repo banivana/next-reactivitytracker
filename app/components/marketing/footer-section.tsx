@@ -77,13 +77,13 @@ export function FooterSection() {
           <h3 className="text-lg font-bold mb-4 font-notoSans">LEGAL</h3>
           <nav className="flex flex-col gap-3">
             <Link
-              href="https://www.reactivitytracker.com/privacy"
+              href="/privacy"
               className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
             >
               Privacy Policy
             </Link>
             <Link
-              href="https://www.reactivitytracker.com/terms"
+              href="/terms"
               className="text-gray-600 hover:text-[#FDB813] transition-colors font-ubuntu"
             >
               Terms of Service

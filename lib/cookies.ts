@@ -1,7 +1,6 @@
 export type CookiePreferences = {
   necessary: boolean;
   analytics: boolean;
-  marketing: boolean;
 };
 
 export const COOKIE_CONSENT_KEY = 'cookie-consent';
@@ -10,7 +9,6 @@ export const COOKIE_PREFERENCES_KEY = 'cookie-preferences';
 export const defaultPreferences: CookiePreferences = {
   necessary: true,
   analytics: false,
-  marketing: false,
 };
 
 export function getCookieConsent(): boolean {

@@ -30,7 +30,6 @@ export function CookieConsentBanner() {
     const allPreferences = {
       necessary: true,
       analytics: true,
-      marketing: true,
     };
     setCookiePreferences(allPreferences);
     setCookieConsent(true);
@@ -40,7 +39,6 @@ export function CookieConsentBanner() {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('consent', 'update', {
         analytics_storage: 'granted',
-        ad_storage: 'granted',
       });
     }
   };
@@ -61,7 +59,6 @@ export function CookieConsentBanner() {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('consent', 'update', {
         analytics_storage: preferences.analytics ? 'granted' : 'denied',
-        ad_storage: preferences.marketing ? 'granted' : 'denied',
       });
     }
   };
@@ -116,18 +113,6 @@ export function CookieConsentBanner() {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <label className="font-medium text-xs sm:text-sm">Marketing Cookies</label>
-                      <p className="text-xs text-gray-500 hidden sm:block">Used to deliver relevant ads and track ad performance</p>
-                    </div>
-                    <input
-                      type="checkbox"
-                      checked={preferences.marketing}
-                      onChange={(e) => handlePreferenceChange('marketing', e.target.checked)}
-                      className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                    />
-                  </div>
                 </div>
               )}
               

@@ -233,7 +233,7 @@ export default function PrivacyPolicy() {
                       </p>
                     </div>
 
-                    <div>
+                    <div className="mb-6">
                       <h4 className="text-lg font-medium text-gray-800 mb-3">
                         Usage Data
                       </h4>
@@ -483,16 +483,12 @@ export default function PrivacyPolicy() {
                   </p>
                   <ul className="list-disc pl-6 space-y-2 text-gray-700">
                     <li>
-                      <strong>With Service Providers:</strong> We may share Your
+                      <strong>With Service Providers:</strong> We may share your
                       personal information with Service Providers to monitor and
-                      analyze the use of our Service, to contact You.
-                    </li>
-                    <li>
-                      <strong>For business transfers:</strong> We may share or
-                      transfer Your personal information in connection with, or
-                      during negotiations of, any merger, sale of Company
-                      assets, financing, or acquisition of all or a portion of
-                      Our business to another company.
+                      analyze the use of our Service, to contact you, and to
+                      provide our core app functionality. This includes Supabase
+                      (our database and authentication provider) which processes
+                      and stores your account information and app data.
                     </li>
                     <li>
                       <strong>With other users:</strong> when You share personal
@@ -531,6 +527,23 @@ export default function PrivacyPolicy() {
                   </p>
 
                   <ul className="list-disc pl-6 space-y-4 text-gray-700">
+                    <li>
+                      <strong>Supabase:</strong> We use Supabase as our primary
+                      database and authentication service provider to securely
+                      store your account information, tracking data, and all
+                      app-related content. Supabase processes this data
+                      according to their{" "}
+                      <a
+                        href="https://supabase.com/privacy"
+                        className="text-blue-600 underline"
+                      >
+                        Privacy Policy
+                      </a>{" "}
+                      and maintains industry-standard security measures
+                      including encryption at rest and in transit. Your data is
+                      stored on secure servers and Supabase acts as a data
+                      processor under our instructions.
+                    </li>
                     <li>
                       <strong>Google Analytics:</strong> We share usage data
                       (such as pages visited, device information, and general
@@ -793,6 +806,11 @@ export default function PrivacyPolicy() {
                     or method of electronic storage is 100% secure. While We
                     strive to use commercially acceptable means to protect Your
                     Personal Data, We cannot guarantee its absolute security.
+                  </p>
+                  <p className="text-gray-700">
+                    Your data is stored securely using Supabase, a trusted cloud
+                    database provider. Supabase maintains industry-standard
+                    security measures to protect your information.
                   </p>
                 </section>
 

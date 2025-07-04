@@ -10,6 +10,11 @@ export async function AnalyticsOverview() {
     getActiveUsers(30, user.id),
   ]);
 
+  console.log("Active users data:", {
+    activeUsers7Days,
+    activeUsers30Days,
+  });
+
   const stats = [
     {
       title: "Active clients (7 days)",

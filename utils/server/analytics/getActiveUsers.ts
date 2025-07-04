@@ -14,6 +14,13 @@ export async function getActiveUsers(days: number = 30, trainerId: string) {
       trainer_id: trainerId,
     });
 
+    console.log("Active users data:", {
+      data,
+      error,
+      start_date: daysAgoStr,
+      trainer_id: trainerId,
+    });
+
     if (error) {
       throw error;
     }

@@ -1,7 +1,13 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@supabase/supabase-js";
 
-export async function getDailyActiveUsers(days: number = 7, trainerId?: string) {
-  const supabase = await createClient();
+export async function getDailyActiveUsers(
+  days: number = 7,
+  trainerId?: string,
+) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  );
 
   // Get date X days ago
   const daysAgo = new Date();
@@ -11,15 +17,18 @@ export async function getDailyActiveUsers(days: number = 7, trainerId?: string) 
     // Get trainer's client user_ids if trainerId is provided
     let clientUserIds: string[] = [];
     if (trainerId) {
-      const { data: trainerClients, error: trainerClientsError } = await supabase
-        .from("trainer_client")
-        .select("client")
-        .eq("trainer", trainerId);
+      const { data: trainerClients, error: trainerClientsError } =
+        await supabase
+          .from("trainer_client")
+          .select("client")
+          .eq("trainer", trainerId);
 
       if (trainerClientsError) {
         console.error("Error fetching trainer clients:", trainerClientsError);
       } else {
-        clientUserIds = (trainerClients || []).map(tc => tc.client).filter(Boolean);
+        clientUserIds = (trainerClients || [])
+          .map((tc) => tc.client)
+          .filter(Boolean);
       }
 
       // If trainer has no clients, return empty result
@@ -29,18 +38,18 @@ export async function getDailyActiveUsers(days: number = 7, trainerId?: string) 
     }
 
     const dailyData = [];
-    
+
     // Get data for each day in the period
     for (let i = days - 1; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      
+
       const startOfDay = new Date(date);
       startOfDay.setHours(0, 0, 0, 0);
-      
+
       const endOfDay = new Date(date);
       endOfDay.setHours(23, 59, 59, 999);
-      
+
       const startOfDayStr = startOfDay.toISOString();
       const endOfDayStr = endOfDay.toISOString();
 
@@ -106,11 +115,16 @@ export async function getDailyActiveUsers(days: number = 7, trainerId?: string) 
       ]);
 
       // Remove any null/undefined values
-      const uniqueActiveUsers = Array.from(allUserIds).filter((id) => id != null);
+      const uniqueActiveUsers = Array.from(allUserIds).filter(
+        (id) => id != null,
+      );
 
       dailyData.push({
-        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-        fullDate: date.toISOString().split('T')[0],
+        date: date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        }),
+        fullDate: date.toISOString().split("T")[0],
         activeUsers: uniqueActiveUsers.length,
       });
     }

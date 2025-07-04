@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
+export const QUERY_LIMIT = 50;
+
 type Event = {
   id: number;
   created_at: string;
@@ -50,33 +52,35 @@ export async function getClientData(userId: string): Promise<ClientData> {
   );
   let error = null;
 
-  // Fetch events data
-  const { data: triggersRes, error: eventsError } = await supabase
-    .from("events")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  const page = 0;
+  const { data: items, error: errorQuery } = await supabase.rpc(
+    "get_combined_journal_data",
+    {
+      user_id_param: userId,
+      offset_param: page * QUERY_LIMIT,
+      limit_param: QUERY_LIMIT,
+    },
+  );
 
-  // Fetch health data
-  const { data: healthRes, error: healthError } = await supabase
-    .from("health")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  const triggersRes = [];
+  const healthRes = [];
+  const notesRes = [];
 
-  // Fetch notes data
-  const { data: notesRes, error: notesError } = await supabase
-    .from("notes")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  if (items) {
+    for (const item of items) {
+      if ("level_of_reaction" in item.data) {
+        triggersRes.push(item.data);
+      } else if ("description" in item.data) {
+        healthRes.push(item.data);
+      } else if ("note_content" in item.data) {
+        notesRes.push(item.data);
+      }
+    }
+  }
 
-  if (eventsError || healthError || notesError) {
-    console.error(
-      "Error fetching data:",
-      eventsError || healthError || notesError,
-    );
-    error = eventsError || healthError || notesError;
+  if (errorQuery) {
+    console.error("Error fetching data:", errorQuery);
+    error = errorQuery;
   }
 
   // Merge data by date

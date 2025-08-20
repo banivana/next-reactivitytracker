@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { resolveLocationLabels } from "../../utils/server/resolveLocationLabels";
 
 export const QUERY_LIMIT = 50;
 
@@ -86,8 +87,15 @@ export async function getClientData(userId: string): Promise<ClientData> {
   // Merge data by date
   const days: Day[] = [];
 
+  // First, resolve location UUIDs to labels for triggers
+  const triggersWithLabels = await resolveLocationLabels(
+    triggersRes,
+    userId,
+    supabase as any,
+  );
+
   // Add triggers/events to data array
-  for (const trigger of triggersRes || []) {
+  for (const trigger of triggersWithLabels || []) {
     let day = days.find((d) => d.date === trigger.date);
     if (!day) {
       day = {
@@ -143,7 +151,7 @@ export async function getClientData(userId: string): Promise<ClientData> {
 
   return {
     days,
-    triggersRes: triggersRes || [],
+    triggersRes: triggersWithLabels || [],
     healthRes: healthRes || [],
     notesRes: notesRes || [],
     error,

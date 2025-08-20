@@ -80,10 +80,20 @@ CREATE TABLE public.events (
   description text,
   created_at date NOT NULL DEFAULT now(),
   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
-  location text DEFAULT ''::text,
+  location uuid, -- Now references locations.id instead of being a text field
   time_of_day text,
   CONSTRAINT events_pkey PRIMARY KEY (id),
-  CONSTRAINT events_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+  CONSTRAINT events_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id),
+  CONSTRAINT events_location_fkey FOREIGN KEY (location) REFERENCES public.locations(id)
+);
+CREATE TABLE public.locations (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  label text NOT NULL,
+  user_id uuid NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  active boolean NOT NULL DEFAULT true,
+  CONSTRAINT locations_pkey PRIMARY KEY (id),
+  CONSTRAINT locations_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
 );
 CREATE TABLE public.health (
   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,

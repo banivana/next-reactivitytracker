@@ -1,4 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
+import { resolveLocationLabels } from "../../utils/server/resolveLocationLabels";
+
+export const QUERY_LIMIT = 50;
 
 type Event = {
   id: number;
@@ -50,40 +53,49 @@ export async function getClientData(userId: string): Promise<ClientData> {
   );
   let error = null;
 
-  // Fetch events data
-  const { data: triggersRes, error: eventsError } = await supabase
-    .from("events")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  const page = 0;
+  const { data: items, error: errorQuery } = await supabase.rpc(
+    "get_combined_journal_data",
+    {
+      user_id_param: userId,
+      offset_param: page * QUERY_LIMIT,
+      limit_param: QUERY_LIMIT,
+    },
+  );
 
-  // Fetch health data
-  const { data: healthRes, error: healthError } = await supabase
-    .from("health")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  const triggersRes = [];
+  const healthRes = [];
+  const notesRes = [];
 
-  // Fetch notes data
-  const { data: notesRes, error: notesError } = await supabase
-    .from("notes")
-    .select("*")
-    .eq("user_id", userId)
-    .order("date", { ascending: false });
+  if (items) {
+    for (const item of items) {
+      if ("level_of_reaction" in item.data) {
+        triggersRes.push(item.data);
+      } else if ("description" in item.data) {
+        healthRes.push(item.data);
+      } else if ("note_content" in item.data) {
+        notesRes.push(item.data);
+      }
+    }
+  }
 
-  if (eventsError || healthError || notesError) {
-    console.error(
-      "Error fetching data:",
-      eventsError || healthError || notesError,
-    );
-    error = eventsError || healthError || notesError;
+  if (errorQuery) {
+    console.error("Error fetching data:", errorQuery);
+    error = errorQuery;
   }
 
   // Merge data by date
   const days: Day[] = [];
 
+  // First, resolve location UUIDs to labels for triggers
+  const triggersWithLabels = await resolveLocationLabels(
+    triggersRes,
+    userId,
+    supabase as any,
+  );
+
   // Add triggers/events to data array
-  for (const trigger of triggersRes || []) {
+  for (const trigger of triggersWithLabels || []) {
     let day = days.find((d) => d.date === trigger.date);
     if (!day) {
       day = {
@@ -139,7 +151,7 @@ export async function getClientData(userId: string): Promise<ClientData> {
 
   return {
     days,
-    triggersRes: triggersRes || [],
+    triggersRes: triggersWithLabels || [],
     healthRes: healthRes || [],
     notesRes: notesRes || [],
     error,

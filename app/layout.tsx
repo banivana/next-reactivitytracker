@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
 import Script from "next/script";
+import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -58,11 +59,15 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+            });
             gtag('config', 'G-5CQD9YP7GE');
           `}
         </Script>
         <NextUIProvider>
           <main className="flex-1">{children}</main>
+          <CookieConsentBanner />
         </NextUIProvider>
       </body>
     </html>

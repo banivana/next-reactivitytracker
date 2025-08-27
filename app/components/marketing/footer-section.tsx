@@ -23,7 +23,7 @@ export function FooterSection() {
             Help your clients with dog reactivity.
           </p>
           <div className="text-right mt-5">
-            <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+            <a href="https://reactivitytracker.kit.com/apptest" target="_blank">
               <Button
                 variant="secondary"
                 className="bg-white border-1 border-black text-black hover:bg-[#FDB813]/90 rounded-2xl font-ubuntu"

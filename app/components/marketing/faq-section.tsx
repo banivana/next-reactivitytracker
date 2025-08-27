@@ -71,7 +71,7 @@ export function FAQSection() {
             <AccordionContent className="text-lg font-notoSans">
               The mobile app is in beta (
               <a
-                href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
+                href="https://reactivitytracker.kit.com/apptest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#FFB915] hover:underline ml-1"
@@ -80,7 +80,7 @@ export function FAQSection() {
               </a>{" "}
               ). The trainer dashboard is launching soon—sign up for an{" "}
               <a
-                href="https://forms.gle/yy6R55PwBhrnuoD16"
+                href="https://reactivitytracker.kit.com/apptest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#FFB915] hover:underline ml-1"
@@ -100,7 +100,7 @@ export function FAQSection() {
             </AccordionTrigger>
             <AccordionContent className="text-lg font-notoSans">
               <a
-                href="https://forms.gle/yy6R55PwBhrnuoD16"
+                href="https://reactivitytracker.kit.com/apptest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#FFB915] hover:underline ml-1"
@@ -121,7 +121,7 @@ export function FAQSection() {
             <AccordionContent className="text-lg font-notoSans">
               Yes! Dog guardians can start tracking triggers (
               <a
-                href="https://forms.gle/QTbF4Ls9X7jUCRpP9"
+                href="https://reactivitytracker.kit.com/apptest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#FFB915] hover:underline ml-1"

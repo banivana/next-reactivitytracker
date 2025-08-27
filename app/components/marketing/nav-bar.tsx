@@ -108,7 +108,7 @@ export function NavBar() {
             <NavLink href="#contact" onClick={() => setIsMenuOpen(false)}>
               Contact
             </NavLink>
-            <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+            <a href="https://reactivitytracker.kit.com/apptest" target="_blank">
               <Button
                 variant="secondary"
                 className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"
@@ -121,7 +121,7 @@ export function NavBar() {
       )}
 
       <div className="hidden lg:block w-[200px] text-right">
-        <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+        <a href="https://reactivitytracker.kit.com/apptest" target="_blank">
           <Button
             variant="secondary"
             className=" bg-black text-white hover:bg-[#FDB813]/90 hover:text-black rounded-2xl font-ubuntu font-bold"

@@ -21,7 +21,7 @@ export function HeroSection() {
         </p>
 
         <div className="mt-10">
-          <a href="https://forms.gle/yy6R55PwBhrnuoD16" target="_blank">
+          <a href="https://reactivitytracker.kit.com/apptest" target="_blank">
             <Button className="rounded-2xl bg-black text-white hover:bg-[#FDB813] hover:text-black px-8 py-6 text-lg font-ubuntu font-bold">
               Join Early Access
             </Button>

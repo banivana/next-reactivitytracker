@@ -5,6 +5,7 @@ import "./globals.css";
 import { Nunito_Sans, Ubuntu, Noto_Sans, Baloo_2 } from "next/font/google";
 import Script from "next/script";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { MicrosoftClarity } from "@/components/analytics/MicrosoftClarity";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -66,6 +67,7 @@ export default function RootLayout({
           `}
         </Script>
         <NextUIProvider>
+          <MicrosoftClarity />
           <main className="flex-1">{children}</main>
           <CookieConsentBanner />
         </NextUIProvider>

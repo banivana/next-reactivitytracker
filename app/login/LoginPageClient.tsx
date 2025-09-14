@@ -16,10 +16,14 @@ import {
 interface LoginPageClientProps {
   redirectedFrom?: string;
   message?: string;
-  hasInvite?: boolean;
+  inviteId?: string;
 }
 
-function LoginForm({ redirectedFrom, message, hasInvite }: LoginPageClientProps) {
+function LoginForm({
+  redirectedFrom,
+  message,
+  inviteId,
+}: LoginPageClientProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(message || null);
@@ -43,8 +47,8 @@ function LoginForm({ redirectedFrom, message, hasInvite }: LoginPageClientProps)
         setError(error.message);
       } else {
         // Redirect to auth callback to process any pending invite
-        if (hasInvite) {
-          router.push("/auth/callback");
+        if (inviteId) {
+          router.push(`/auth/invite?inviteId=${inviteId}`);
         } else {
           router.push(redirectTo);
         }

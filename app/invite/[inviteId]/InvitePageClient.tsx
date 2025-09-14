@@ -31,12 +31,6 @@ export default function InvitePageClient({ inviteId }: InvitePageClientProps) {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          emailRedirectTo: `${location.origin}/auth/callback`,
-          data: {
-            inviteId: inviteId,
-          },
-        },
       });
 
       if (error) {
@@ -68,8 +62,7 @@ export default function InvitePageClient({ inviteId }: InvitePageClientProps) {
       if (error) {
         setError(error.message);
       } else {
-        // Redirect to dashboard or callback
-        router.push("/auth/callback");
+        router.push(`/auth/invite?inviteId=${inviteId}`);
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");

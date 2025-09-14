@@ -10,12 +10,12 @@ interface LoginPageProps {
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const { inviteId, redirectedFrom, message } = await searchParams;
-  
+
   return (
-    <LoginPageClient 
+    <LoginPageClient
       redirectedFrom={redirectedFrom}
       message={message}
-      hasInvite={!!inviteId}
+      inviteId={inviteId}
     />
   );
 }

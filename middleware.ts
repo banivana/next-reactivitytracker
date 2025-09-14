@@ -2,11 +2,30 @@ import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
+  const response = NextResponse.next({
     request: {
       headers: request.headers,
     },
   });
+
+  // Handle invite ID cookie setting for invite and login pages
+  const url = request.nextUrl;
+  if (url.pathname.startsWith("/invite/") || url.pathname === "/login") {
+    const inviteId = url.pathname.startsWith("/invite/") 
+      ? url.pathname.split("/invite/")[1] 
+      : url.searchParams.get("inviteId");
+    
+    if (inviteId) {
+      // Set secure session cookie that expires in 24 hours
+      response.cookies.set("inviteId", inviteId, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24, // 24 hours
+        path: "/",
+      });
+    }
+  }
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

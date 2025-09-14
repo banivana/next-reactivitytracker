@@ -1,6 +1,7 @@
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getInviteIdCookie, processInvite } from "../../invite/actions";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -29,6 +30,16 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      const inviteId = await getInviteIdCookie();
+
+      if (inviteId) {
+        try {
+          await processInvite(inviteId);
+        } catch (error) {
+          console.error("Error processing invite:", error);
+        }
+      }
+
       return NextResponse.redirect(`${origin}${next}`);
     }
   }

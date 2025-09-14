@@ -1,7 +1,6 @@
 import { DashboardNav } from "../components/DashboardNav";
 import { getUser } from "@/utils/server/getUser";
 import { getClientUsers } from "@/utils/server/getClientUsers";
-import { redirect } from "next/navigation";
 import { LoadingProgress } from "@/components/LoadingProgress";
 
 export default async function DashboardLayout({
@@ -10,11 +9,11 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { isTrainer } = await getUser();
-  if (!isTrainer) {
-    redirect("/restricted");
-  }
-
-  const { clients } = await getClientUsers();
+  const { clients } = isTrainer
+    ? await getClientUsers()
+    : {
+        clients: [],
+      };
 
   return (
     <div className="min-h-screen bg-gray-50">

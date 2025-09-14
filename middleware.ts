@@ -8,25 +8,6 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // Handle invite ID cookie setting for invite and login pages
-  const url = request.nextUrl;
-  if (url.pathname.startsWith("/invite/") || url.pathname === "/login") {
-    const inviteId = url.pathname.startsWith("/invite/") 
-      ? url.pathname.split("/invite/")[1] 
-      : url.searchParams.get("inviteId");
-    
-    if (inviteId) {
-      // Set secure session cookie that expires in 24 hours
-      response.cookies.set("inviteId", inviteId, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24, // 24 hours
-        path: "/",
-      });
-    }
-  }
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -53,7 +34,9 @@ export async function middleware(request: NextRequest) {
     },
   );
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   // If there's no session and the user is trying to access a protected route
   if (!session && request.nextUrl.pathname.startsWith("/dashboard")) {

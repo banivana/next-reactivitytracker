@@ -48,7 +48,7 @@ function LoginForm({
       } else {
         // Redirect to auth callback to process any pending invite
         if (inviteId) {
-          router.push(`/auth/invite?inviteId=${inviteId}`);
+          router.push(`/auth/accept-invite?inviteId=${inviteId}`);
         } else {
           router.push(redirectTo);
         }

@@ -62,7 +62,7 @@ export default function InvitePageClient({ inviteId }: InvitePageClientProps) {
       if (error) {
         setError(error.message);
       } else {
-        router.push(`/auth/invite?inviteId=${inviteId}`);
+        router.push(`/auth/accept-invite?inviteId=${inviteId}`);
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");
@@ -80,10 +80,7 @@ export default function InvitePageClient({ inviteId }: InvitePageClientProps) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `https://reactivitytracker.com/auth/callback`,
-          queryParams: {
-            inviteId: inviteId,
-          },
+          redirectTo: `https://reactivitytracker.com/auth/callback?inviteId=${inviteId}`,
         },
       });
       if (error) {

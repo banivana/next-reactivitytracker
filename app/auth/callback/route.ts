@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  const inviteId = searchParams.get("inviteId");
   const next = searchParams.get("next") ?? "/dashboard";
 
   if (code) {
@@ -29,6 +30,11 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      if (inviteId) {
+        return NextResponse.redirect(
+          `${origin}/auth/accept-invite?inviteId=${inviteId}`,
+        );
+      }
       return NextResponse.redirect(`${origin}${next}`);
     }
   }

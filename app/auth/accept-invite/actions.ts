@@ -105,6 +105,13 @@ export async function addClientToTrainer({
         error: userError,
       } = await supabase.auth.admin.getUserById(userId);
 
+      const trainerUserRes = await supabase.auth.admin
+        .getUserById(trainerId)
+        .catch((err) => {
+          console.error("Error fetching trainer user:", err);
+          return null;
+        });
+
       if (userError) {
         throw new Error("Failed to fetch user for notification.");
       }
@@ -123,6 +130,7 @@ export async function addClientToTrainer({
               <li><strong>Name:</strong> ${fullName}</li>
               <li><strong>Email:</strong> ${user.email}</li>
               <li><strong>Platform:</strong> ${platform}</li>
+              <li><strong>Trainer:</strong> ${trainerUserRes?.data?.user?.email}</li>
             </ul>
           `,
         });

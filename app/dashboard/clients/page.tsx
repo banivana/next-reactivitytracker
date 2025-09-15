@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users, Pencil } from "lucide-react";
 import { getClientUsers } from "@/utils/server/getClientUsers";
+import InviteManager from "@/app/components/InviteManager";
 
 export default async function ClientsPage() {
   const { clients, error } = await getClientUsers();
@@ -24,6 +25,8 @@ export default async function ClientsPage() {
           </Button>
         </div>
 
+        <InviteManager />
+
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <h3 className="text-lg font-medium">No clients yet</h3>
           <p className="text-gray-500 mt-2">
@@ -45,6 +48,8 @@ export default async function ClientsPage() {
           </Link>
         </Button>
       </div>
+
+      <InviteManager />
 
       <div className="bg-white shadow overflow-hidden rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">

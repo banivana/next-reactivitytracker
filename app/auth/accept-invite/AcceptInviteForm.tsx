@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { addClientToTrainer } from "./actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Logo from "@/components/Logo";
 
 interface AcceptInviteFormProps {
@@ -21,13 +21,13 @@ export default function AcceptInviteForm({
   trainerId,
   userId,
 }: AcceptInviteFormProps) {
+  const router = useRouter();
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
     null
   );
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,7 +51,7 @@ export default function AcceptInviteForm({
       });
 
       if (result.success) {
-        setIsSuccess(true);
+        router.push(`/auth/successful-invite?platform=${selectedPlatform}`);
       } else {
         setError(result.error || "Failed to complete registration");
       }
@@ -61,51 +61,6 @@ export default function AcceptInviteForm({
       setIsSubmitting(false);
     }
   };
-
-  if (isSuccess) {
-    return (
-      <Card className="w-[400px] shadow-lg">
-        <CardHeader className="text-center pb-6">
-          {/* Logo */}
-          <div className="flex items-center justify-center mb-6">
-            <Logo className="h-12 w-auto" />
-            <span className="text-3xl font-extrabold ml-3">
-              <span className="text-[#FFB915]">Reactivity</span>Tracker
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FontAwesomeIcon
-                icon={faCheck}
-                className="w-8 h-8 text-green-600"
-              />
-            </div>
-
-            <h1 className="text-2xl font-bold text-gray-900">
-              Registration Successful!
-            </h1>
-
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Thank you for completing your registration. We will send you a
-              download link for the{" "}
-              <span className="font-medium capitalize">{selectedPlatform}</span>{" "}
-              app as soon as possible.
-            </p>
-          </div>
-        </CardHeader>
-
-        <CardContent>
-          <a
-            href="/dashboard"
-            className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-          >
-            Go to Dashboard
-          </a>
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <Card className="w-[400px] shadow-lg">

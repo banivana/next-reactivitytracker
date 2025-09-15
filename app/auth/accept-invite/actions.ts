@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { Resend } from "resend";
 
 interface AddClientToTrainerParams {
   trainerId: string;
@@ -95,6 +96,40 @@ export async function addClientToTrainer({
           // Don't fail the whole operation if profile update fails
         }
       }
+    }
+
+    // Send email notification
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.admin.getUserById(userId);
+
+      if (userError) {
+        throw new Error("Failed to fetch user for notification.");
+      }
+
+      if (user && user.email) {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const fullName = `${firstName || ""} ${lastName || ""}`.trim();
+
+        await resend.emails.send({
+          from: "ReactivityTracker <onboarding@reactivitytracker.com>",
+          to: "hello@reactivitytracker.com",
+          subject: "New User Registration - App Link Request",
+          html: `
+            <p>A new user has completed the invite registration and is requesting an app download link.</p>
+            <ul>
+              <li><strong>Name:</strong> ${fullName}</li>
+              <li><strong>Email:</strong> ${user.email}</li>
+              <li><strong>Platform:</strong> ${platform}</li>
+            </ul>
+          `,
+        });
+      }
+    } catch (emailError) {
+      console.error("Failed to send registration email:", emailError);
+      // Do not block the main flow if email fails
     }
 
     // Revalidate relevant paths

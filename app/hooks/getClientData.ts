@@ -43,17 +43,19 @@ export type ClientData = {
   healthRes: Health[];
   notesRes: Note[];
   error: Error | null;
+  hasMoreData: boolean;
 };
 
-export async function getClientData(userId: string): Promise<ClientData> {
+export async function getClientData(
+  userId: string,
+  page: number = 0,
+): Promise<ClientData> {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     { auth: { autoRefreshToken: false, persistSession: false } },
   );
   let error = null;
-
-  const page = 0;
   const { data: items, error: errorQuery } = await supabase.rpc(
     "get_combined_journal_data",
     {
@@ -155,5 +157,6 @@ export async function getClientData(userId: string): Promise<ClientData> {
     healthRes: healthRes || [],
     notesRes: notesRes || [],
     error,
+    hasMoreData: QUERY_LIMIT === items.length,
   };
 }

@@ -72,7 +72,7 @@ export default async function Page({
       <div className="flex gap-6 pb-4">
         {/* Left panel - Journal */}
         <div className="flex-1">
-          <ClientJournal days={clientData.days} />
+          <ClientJournal userId={userId} initialData={clientData} />
         </div>
 
         {/* Right panel - Analytics */}

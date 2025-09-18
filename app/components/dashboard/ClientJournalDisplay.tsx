@@ -3,9 +3,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 import { TriggerIcon } from "./TriggerIcon";
-import { useState } from "react";
-
-const DAYS_LOAD_LIMIT = 10;
 
 type Event = {
   id: number;
@@ -41,9 +38,17 @@ type Day = {
   triggers: Event[];
 };
 
-export default function ClientJournalDisplay({ days }: { days: Day[] }) {
-  const [visibleDays, setVisibleDays] = useState(DAYS_LOAD_LIMIT);
-
+export default function ClientJournalDisplay({
+  days,
+  isLoading = false,
+  hasMoreData = true,
+  onLoadMore,
+}: {
+  days: Day[];
+  isLoading?: boolean;
+  hasMoreData?: boolean;
+  onLoadMore?: () => Promise<void>;
+}) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `${date.getDate()} ${date.toLocaleString("default", {
@@ -51,11 +56,11 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
     })} ${date.getFullYear()}`;
   };
 
-  const handleShowMore = () => {
-    setVisibleDays((prev) => Math.min(prev + DAYS_LOAD_LIMIT, days.length));
+  const handleShowMore = async () => {
+    if (onLoadMore) {
+      await onLoadMore();
+    }
   };
-
-  const displayedDays = days.slice(0, visibleDays);
 
   return (
     <div className="space-y-6">
@@ -65,7 +70,7 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
         </p>
       ) : (
         <div className="space-y-8">
-          {displayedDays.map((day) => (
+          {days.map((day) => (
             <div
               key={day.date}
               className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
@@ -160,13 +165,14 @@ export default function ClientJournalDisplay({ days }: { days: Day[] }) {
             </div>
           ))}
 
-          {days.length > visibleDays && (
+          {hasMoreData && (
             <div className="flex justify-center">
               <button
                 onClick={handleShowMore}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                disabled={isLoading}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Show More
+                {isLoading ? "Loading..." : "Show More"}
               </button>
             </div>
           )}

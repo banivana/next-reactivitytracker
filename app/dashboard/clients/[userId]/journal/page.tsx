@@ -1,11 +1,9 @@
 import ClientJournal from "@/app/components/dashboard/ClientJournal";
-import ZonesPieChart from "@/app/components/dashboard/ZonesPieChart";
-import WeeklyZoneDistribution from "@/app/components/dashboard/WeeklyZoneDistribution";
 import { getClientData } from "@/app/hooks/getClientData";
 import { checkTrainerClientAccess } from "@/app/hooks/useTrainerClientAccess";
 import { getUser } from "@/utils/server/getUser";
 
-export default async function Page({
+export default async function ClientJournalPage({
   params,
 }: {
   params: Promise<{ userId: string }>;
@@ -29,20 +27,8 @@ export default async function Page({
   }
 
   return (
-    <div className="flex gap-6 pb-4">
-      {/* Left panel - Journal */}
-      <div className="flex-1">
-        <ClientJournal userId={userId} initialData={clientData} />
-      </div>
-
-      {/* Right panel - Analytics */}
-      <div className="flex-1 space-y-4">
-        <div className="bg-white shadow overflow-hidden rounded-lg p-6 space-y-4">
-          <h3 className="text-lg font-medium">Zones Distribution</h3>
-          <ZonesPieChart triggers={clientData.triggersRes} />
-        </div>
-        <WeeklyZoneDistribution triggers={clientData.triggersRes} />
-      </div>
+    <div className="pb-4">
+      <ClientJournal userId={userId} initialData={clientData} />
     </div>
   );
 }

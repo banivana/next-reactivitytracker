@@ -42,9 +42,17 @@ export default function ClientNavigation({ userId }: ClientNavigationProps) {
           Journal
         </button>
       </Link>
-      <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
-        Triggers
-      </button>
+      <Link href={`/dashboard/clients/${userId}/triggers`}>
+        <button
+          className={`px-4 py-2 rounded-full ${
+            isActive(`/dashboard/clients/${userId}/triggers`)
+              ? "bg-gray-100 font-medium"
+              : "text-gray-500 hover:bg-gray-100"
+          }`}
+        >
+          Triggers
+        </button>
+      </Link>
       <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
         Health
       </button>

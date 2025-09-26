@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { useState, useMemo } from "react";
 import { TriggerIcon } from "@/app/components/dashboard/TriggerIcon";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 type Event = {
   id: number;
@@ -36,6 +37,59 @@ export default function TriggersTable({ triggers }: TriggersTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
+  const [selectedReactions, setSelectedReactions] = useState<string[]>([]);
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+
+  const reactionOptions = [
+    {
+      label: "Green",
+      value: "green",
+      color: "bg-green-100 text-green-800 border-green-200",
+    },
+    {
+      label: "Yellow",
+      value: "yellow",
+      color: "bg-yellow-100 text-yellow-800 border-yellow-200",
+    },
+    {
+      label: "Red",
+      value: "red",
+      color: "bg-red-100 text-red-800 border-red-200",
+    },
+  ];
+
+  // Get unique locations from triggers data
+  const locationOptions = useMemo(() => {
+    const uniqueLocations = Array.from(
+      new Set(triggers.map((trigger) => trigger.location).filter(Boolean))
+    ).sort();
+
+    return uniqueLocations.map((location) => ({
+      label: location,
+      value: location,
+    }));
+  }, [triggers]);
+
+  // Filter triggers based on selected reactions and locations
+  const filteredTriggers = useMemo(() => {
+    let filtered = triggers;
+
+    // Filter by reactions
+    if (selectedReactions.length > 0) {
+      filtered = filtered.filter((trigger) =>
+        selectedReactions.includes(trigger.level_of_reaction)
+      );
+    }
+
+    // Filter by locations
+    if (selectedLocations.length > 0) {
+      filtered = filtered.filter((trigger) =>
+        selectedLocations.includes(trigger.location)
+      );
+    }
+
+    return filtered;
+  }, [triggers, selectedReactions, selectedLocations]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -137,7 +191,7 @@ export default function TriggersTable({ triggers }: TriggersTableProps) {
   );
 
   const table = useReactTable({
-    data: triggers,
+    data: filteredTriggers,
     columns,
     state: {
       sorting,
@@ -166,6 +220,28 @@ export default function TriggersTable({ triggers }: TriggersTableProps) {
     );
   }
 
+  if (
+    filteredTriggers.length === 0 &&
+    (selectedReactions.length > 0 || selectedLocations.length > 0)
+  ) {
+    return (
+      <div className="p-8 text-center text-gray-500">
+        No trigger events found matching the selected filters.
+        <div className="mt-2">
+          <button
+            onClick={() => {
+              setSelectedReactions([]);
+              setSelectedLocations([]);
+            }}
+            className="text-blue-600 hover:text-blue-800 underline"
+          >
+            Clear all filters
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {/* Search and controls */}
@@ -178,28 +254,29 @@ export default function TriggersTable({ triggers }: TriggersTableProps) {
             onChange={(e) => setGlobalFilter(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <select
-            value={
-              (table
-                .getColumn("level_of_reaction")
-                ?.getFilterValue() as string) ?? ""
-            }
-            onChange={(e) =>
-              table
-                .getColumn("level_of_reaction")
-                ?.setFilterValue(e.target.value || undefined)
-            }
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="">All Reactions</option>
-            <option value="green">Green</option>
-            <option value="yellow">Yellow</option>
-            <option value="red">Red</option>
-          </select>
+          <MultiSelect
+            options={reactionOptions}
+            selected={selectedReactions}
+            onChange={setSelectedReactions}
+            placeholder="Filter by reactions..."
+            className="w-64"
+          />
+          <MultiSelect
+            options={locationOptions}
+            selected={selectedLocations}
+            onChange={setSelectedLocations}
+            placeholder="Filter by locations..."
+            className="w-64"
+          />
         </div>
         <div className="text-sm text-gray-600">
-          Showing {table.getRowModel().rows.length} of {triggers.length}{" "}
+          Showing {table.getRowModel().rows.length} of {filteredTriggers.length}{" "}
           triggers
+          {(selectedReactions.length > 0 || selectedLocations.length > 0) && (
+            <span className="text-gray-500 ml-1">
+              (filtered from {triggers.length} total)
+            </span>
+          )}
         </div>
       </div>
 

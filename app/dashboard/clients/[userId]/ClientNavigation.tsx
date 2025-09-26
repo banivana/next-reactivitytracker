@@ -31,17 +31,7 @@ export default function ClientNavigation({ userId }: ClientNavigationProps) {
           Home
         </button>
       </Link>
-      <Link href={`/dashboard/clients/${userId}/journal`}>
-        <button
-          className={`px-4 py-2 rounded-full ${
-            isActive(`/dashboard/clients/${userId}/journal`)
-              ? "bg-gray-100 font-medium"
-              : "text-gray-500 hover:bg-gray-100"
-          }`}
-        >
-          Journal
-        </button>
-      </Link>
+
       <Link href={`/dashboard/clients/${userId}/triggers`}>
         <button
           className={`px-4 py-2 rounded-full ${
@@ -53,15 +43,6 @@ export default function ClientNavigation({ userId }: ClientNavigationProps) {
           Triggers
         </button>
       </Link>
-      <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
-        Health
-      </button>
-      <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
-        Notes
-      </button>
-      <button className="px-4 py-2 rounded-full text-gray-500 hover:bg-gray-100">
-        Graphs
-      </button>
     </nav>
   );
 }

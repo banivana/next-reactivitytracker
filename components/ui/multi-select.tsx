@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronDown, X } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,12 +41,6 @@ export function MultiSelect({
     }
   };
 
-  const handleRemove = (value: string, event?: React.MouseEvent) => {
-    event?.preventDefault();
-    event?.stopPropagation();
-    onChange(selected.filter((item) => item !== value));
-  };
-
   const selectedOptions = options.filter((option) =>
     selected.includes(option.value)
   );
@@ -65,35 +59,7 @@ export function MultiSelect({
           )}
         >
           <div className="flex flex-wrap gap-1 flex-1">
-            {selectedOptions.length > 0 ? (
-              selectedOptions.map((option) => (
-                <span
-                  key={option.value}
-                  className={cn(
-                    "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border",
-                    option.color || "bg-gray-100 text-gray-800 border-gray-200"
-                  )}
-                >
-                  {option.color && (
-                    <div
-                      className={cn(
-                        "w-2 h-2 rounded-full",
-                        option.value === "green" && "bg-green-500",
-                        option.value === "yellow" && "bg-yellow-500",
-                        option.value === "red" && "bg-red-500"
-                      )}
-                    />
-                  )}
-                  {option.label}
-                  <X
-                    className="h-3 w-3 cursor-pointer hover:bg-black/10 rounded"
-                    onClick={(event) => handleRemove(option.value, event)}
-                  />
-                </span>
-              ))
-            ) : (
-              <span className="text-muted-foreground">{placeholder}</span>
-            )}
+            <span className="text-muted-foreground">{placeholder}</span>
           </div>
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

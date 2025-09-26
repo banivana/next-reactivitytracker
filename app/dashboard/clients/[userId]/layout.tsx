@@ -30,7 +30,7 @@ export default async function ClientLayout({
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">
-          Clients / {trainerClientData.first_name} {trainerClientData.last_name}
+          {trainerClientData.first_name} {trainerClientData.last_name}
         </h1>
         <Button asChild size="sm" variant="outline">
           <Link href={`/dashboard/clients/${userId}/edit`}>

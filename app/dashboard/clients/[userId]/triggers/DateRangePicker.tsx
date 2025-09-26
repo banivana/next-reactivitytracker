@@ -98,7 +98,7 @@ export default function DateRangePicker({ userId }: DateRangePickerProps) {
                 format(date.from, "MMM dd, y")
               )
             ) : (
-              <span>Pick a date range</span>
+              <span>Date range</span>
             )}
           </Button>
         </PopoverTrigger>

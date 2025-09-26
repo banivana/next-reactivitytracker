@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@radix-ui/react-popover": "npm:@radix-ui/react-popover@^1.1.15"
+  }
+}

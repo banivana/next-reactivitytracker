@@ -7,10 +7,12 @@ export default async function DashboardHomePage() {
   const { user, isTrainer } = await getUser();
 
   let feedItems = [];
+  let clientCount = 0;
 
   if (isTrainer) {
     // Get all clients for this trainer
     const { clients, error: clientsError } = await getClientUsers();
+    clientCount = clients.length;
 
     if (!clientsError && clients.length > 0) {
       // Extract client IDs
@@ -29,7 +31,7 @@ export default async function DashboardHomePage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
@@ -42,54 +44,52 @@ export default async function DashboardHomePage() {
       </div>
 
       {isTrainer ? (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Main activity feed */}
-          <div className="lg:col-span-2">
+          <div className="flex-1 lg:flex-[3]">
             <ActivityFeed feedItems={feedItems} />
           </div>
 
-          {/* Side panel for quick stats */}
-          <div className="space-y-6">
+          {/* Plan Details Panel */}
+          <div className="flex-1 lg:flex-[2] space-y-6">
             <div className="bg-white rounded-lg shadow border p-6">
-              <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Total Activity</span>
-                  <span className="font-medium">{feedItems.length}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Events</span>
-                  <span className="font-medium">
-                    {feedItems.filter((item) => item.type === "event").length}
+              <h3 className="text-lg font-semibold mb-4">Plan Details</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Current Plan</span>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    Premium
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Health Entries</span>
-                  <span className="font-medium">
-                    {feedItems.filter((item) => item.type === "health").length}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Notes</span>
-                  <span className="font-medium">
-                    {feedItems.filter((item) => item.type === "note").length}
-                  </span>
-                </div>
-              </div>
-            </div>
 
-            <div className="bg-white rounded-lg shadow border p-6">
-              <h3 className="text-lg font-semibold mb-4">Recent Summary</h3>
-              <div className="text-sm text-gray-600">
-                {feedItems.length > 0 ? (
-                  <p>
-                    Your clients have logged {feedItems.length} items recently.
-                    Most recent activity was{" "}
-                    {new Date(feedItems[0]?.created_at).toLocaleDateString()}.
-                  </p>
-                ) : (
-                  <p>No recent activity from your clients.</p>
-                )}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-600">Clients Added</span>
+                    <span className="font-medium">{clientCount} / 100</span>
+                  </div>
+
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${Math.min((clientCount / 100) * 100, 100)}%`,
+                      }}
+                    ></div>
+                  </div>
+
+                  <div className="text-xs text-gray-500 mt-1">
+                    {100 - clientCount} clients remaining
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Plan Status</span>
+                    <span className="text-sm font-medium text-green-600">
+                      Active
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

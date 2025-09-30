@@ -16,7 +16,7 @@ type Event = {
 
 export type FeedItem = {
   id: number;
-  type: "event" | "health" | "note";
+  type: "trigger" | "health" | "note";
   created_at: string;
   user_id: string;
   date: string;
@@ -136,7 +136,7 @@ export async function getRecentActivityFeed(
       allEventsWithLabels.forEach((event) => {
         feedItems.push({
           id: event.id,
-          type: "event",
+          type: "trigger",
           created_at: event.created_at,
           user_id: event.user_id,
           date: event.date,

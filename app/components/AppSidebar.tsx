@@ -10,6 +10,7 @@ import {
   User,
   ChevronRight,
   UserPlus,
+  BarChart3,
 } from "lucide-react";
 import {
   Sidebar,
@@ -57,6 +58,18 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                   <Link href="/dashboard/home">
                     <Home />
                     <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/dashboard/analytics")}
+                >
+                  <Link href="/dashboard/analytics">
+                    <BarChart3 />
+                    <span>Usage Analytics</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

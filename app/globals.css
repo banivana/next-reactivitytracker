@@ -6,16 +6,74 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* React Day Picker styles */
-.rdp {
-  --rdp-cell-size: 2.25rem; /* 36px */
-  --rdp-accent-color: hsl(var(--primary));
-  --rdp-background-color: hsl(var(--background));
-  --rdp-accent-color-dark: hsl(var(--primary));
-  --rdp-background-color-dark: hsl(var(--background));
+/* React DatePicker custom styles */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  background-color: hsl(var(--background));
 }
 
-.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+.react-datepicker__header {
+  background-color: hsl(var(--muted));
+  border-bottom: 1px solid hsl(var(--border));
+  border-radius: 6px 6px 0 0;
+}
+
+.react-datepicker__current-month {
+  color: hsl(var(--foreground));
+  font-weight: 500;
+}
+
+.react-datepicker__day-name {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8rem;
+}
+
+.react-datepicker__day {
+  color: hsl(var(--foreground));
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.react-datepicker__day:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.react-datepicker__day--selected {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.react-datepicker__day--in-range {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.react-datepicker__day--today {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.react-datepicker__day--disabled {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.5;
+}
+
+.react-datepicker__navigation {
+  border: none;
+  background: none;
+  color: hsl(var(--foreground));
+}
+
+.react-datepicker__navigation:hover {
   background-color: hsl(var(--accent));
 }
 

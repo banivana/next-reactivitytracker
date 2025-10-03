@@ -12,7 +12,7 @@ export default async function DashboardHomePage() {
   if (isTrainer) {
     // Get all clients for this trainer
     const { clients, error: clientsError } = await getClientUsers();
-    clientCount = clients.length;
+    clientCount = clients.filter(client => client.active).length;
 
     if (!clientsError && clients.length > 0) {
       // Extract client IDs

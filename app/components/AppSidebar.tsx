@@ -44,6 +44,10 @@ export function AppSidebar({ clients }: AppSidebarProps) {
   const isClientActive = (clientId: string) =>
     pathname.includes(`/dashboard/clients/${clientId}`);
 
+  // Separate active and inactive clients
+  const activeClients = clients.filter((client) => client.active);
+  const inactiveClients = clients.filter((client) => !client.active);
+
   return (
     <Sidebar>
       <SidebarContent className="pt-4">
@@ -62,18 +66,6 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  asChild
-                  isActive={isActive("/dashboard/analytics")}
-                >
-                  <Link href="/dashboard/analytics">
-                    <BarChart3 />
-                    <span>Usage Analytics</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
               <Collapsible defaultOpen={true} className="group/collapsible">
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
@@ -87,7 +79,7 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      {clients.map((client) => (
+                      {activeClients.map((client) => (
                         <SidebarMenuSubItem key={client.id}>
                           <SidebarMenuSubButton
                             asChild
@@ -102,10 +94,56 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
+                      {inactiveClients.length > 0 && (
+                        <Collapsible className="group/inactive">
+                          <SidebarMenuSubItem>
+                            <CollapsibleTrigger asChild>
+                              <SidebarMenuSubButton>
+                                <Users />
+                                <span>Inactive</span>
+                                <ChevronRight className="ml-auto transition-transform group-data-[state=open]/inactive:rotate-90" />
+                              </SidebarMenuSubButton>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                              <SidebarMenuSub>
+                                {inactiveClients.map((client) => (
+                                  <SidebarMenuSubItem key={client.id}>
+                                    <SidebarMenuSubButton
+                                      asChild
+                                      isActive={isClientActive(client.id)}
+                                    >
+                                      <Link
+                                        href={`/dashboard/clients/${client.id}`}
+                                      >
+                                        <User />
+                                        <span className="opacity-60">
+                                          {client.first_name} {client.last_name}
+                                        </span>
+                                      </Link>
+                                    </SidebarMenuSubButton>
+                                  </SidebarMenuSubItem>
+                                ))}
+                              </SidebarMenuSub>
+                            </CollapsibleContent>
+                          </SidebarMenuSubItem>
+                        </Collapsible>
+                      )}
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/dashboard/analytics")}
+                >
+                  <Link href="/dashboard/analytics">
+                    <BarChart3 />
+                    <span>Usage Analytics</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
 
               <Collapsible defaultOpen={true} className="group/collapsible">
                 <SidebarMenuItem>

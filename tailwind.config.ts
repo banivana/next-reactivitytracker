@@ -1,6 +1,7 @@
 import { type Config } from "tailwindcss";
 import { nextui } from "@nextui-org/theme";
 import tailwindcssAnimate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -110,5 +111,5 @@ export default {
       },
     },
   },
-  plugins: [nextui(), tailwindcssAnimate],
+  plugins: [nextui(), tailwindcssAnimate, typography],
 } satisfies Config;

@@ -5,6 +5,7 @@ export interface Client {
   id: string;
   first_name: string | null;
   last_name: string | null;
+  active: boolean;
 }
 
 export async function getClientUsers() {
@@ -13,7 +14,7 @@ export async function getClientUsers() {
 
   const { data: clientUsers, error: clientsError } = await supabase
     .from("trainer_client")
-    .select("*")
+    .select("client, first_name, last_name, active")
     .eq("trainer", user.id);
 
   if (clientsError) {
@@ -27,6 +28,7 @@ export async function getClientUsers() {
       id: client.client,
       first_name: client.first_name,
       last_name: client.last_name,
+      active: client.active ?? true,
     });
   }
 

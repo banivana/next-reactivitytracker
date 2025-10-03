@@ -1,4 +1,5 @@
 import { AppSidebar } from "../components/AppSidebar";
+import { DashboardHeader } from "../components/DashboardHeader";
 import { getUser } from "@/utils/server/getUser";
 import { getClientUsers } from "@/utils/server/getClientUsers";
 import { LoadingProgress } from "@/components/LoadingProgress";
@@ -9,7 +10,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isTrainer } = await getUser();
+  const { user, isTrainer } = await getUser();
   const { clients } = isTrainer
     ? await getClientUsers()
     : {
@@ -21,6 +22,7 @@ export default async function DashboardLayout({
       <LoadingProgress />
       <AppSidebar clients={clients} />
       <SidebarInset>
+        <DashboardHeader userName={user?.email} clients={clients} />
         <div className="flex flex-1 flex-col gap-4 p-4 bg-gray-50">
           {children}
         </div>

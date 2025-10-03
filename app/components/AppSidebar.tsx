@@ -2,20 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Home,
-  Settings,
-  LogOut,
   Users,
   User,
   ChevronRight,
-  UserPlus,
   BarChart3,
+  UserPlus,
 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
@@ -25,7 +23,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { signOut } from "@/app/auth/actions";
 import { Client } from "@/utils/server/getClientUsers";
 import {
   Collapsible,
@@ -48,6 +45,18 @@ export function AppSidebar({ clients }: AppSidebarProps) {
   const activeClients = clients.filter((client) => client.active);
   const inactiveClients = clients.filter((client) => !client.active);
 
+  const isInactiveClientOpen = inactiveClients.some((client) =>
+    isClientActive(client.id)
+  );
+
+  const [inactiveOpen, setInactiveOpen] = useState(isInactiveClientOpen);
+
+  useEffect(() => {
+    if (isInactiveClientOpen) {
+      setInactiveOpen(true);
+    }
+  }, [isInactiveClientOpen]);
+
   return (
     <Sidebar>
       <SidebarContent className="pt-4">
@@ -62,6 +71,18 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                   <Link href="/dashboard/home">
                     <Home />
                     <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/dashboard/settings/invite-client")}
+                >
+                  <Link href="/dashboard/settings/invite-client">
+                    <UserPlus />
+                    <span>Add a client</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -95,7 +116,11 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                         </SidebarMenuSubItem>
                       ))}
                       {inactiveClients.length > 0 && (
-                        <Collapsible className="group/inactive">
+                        <Collapsible
+                          open={inactiveOpen}
+                          onOpenChange={setInactiveOpen}
+                          className="group/inactive"
+                        >
                           <SidebarMenuSubItem>
                             <CollapsibleTrigger asChild>
                               <SidebarMenuSubButton>
@@ -144,54 +169,10 @@ export function AppSidebar({ clients }: AppSidebarProps) {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-
-              <Collapsible defaultOpen={true} className="group/collapsible">
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      <Settings />
-                      <span>Settings</span>
-                      <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton
-                          asChild
-                          isActive={isActive(
-                            "/dashboard/settings/invite-client"
-                          )}
-                        >
-                          <Link href="/dashboard/settings/invite-client">
-                            <UserPlus />
-                            <span>Invite client</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <form action={signOut} className="w-full">
-              <SidebarMenuButton asChild>
-                <button type="submit" className="w-full">
-                  <LogOut />
-                  <span>Logout</span>
-                </button>
-              </SidebarMenuButton>
-            </form>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
     </Sidebar>
   );
 }
